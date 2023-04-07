@@ -1,0 +1,1 @@
+{"name":"Local: trungthu","url":"f:\\c++\\BFC45\\trungthu.cpp","tests":[{"id":1662011540799,"input":"4 1000\n110\n100\n150\n160","output":"8"},{"id":1662011543916,"input":"3 5\n1\n1\n1","output":"5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\c++\\BFC45\\trungthu.cpp","group":"local","local":true}

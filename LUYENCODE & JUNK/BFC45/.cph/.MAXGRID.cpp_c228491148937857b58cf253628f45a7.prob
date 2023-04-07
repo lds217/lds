@@ -1,0 +1,1 @@
+{"name":"Local: MAXGRID","url":"f:\\c++\\BFC45\\MAXGRID.cpp","tests":[{"id":1662012922392,"input":"2 2\n1 -1\n1 1","output":"2"},{"id":1662012925975,"input":"3 3\n-3 -2 3\n2 -2 1\n1 2 3","output":"17"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\c++\\BFC45\\MAXGRID.cpp","group":"local","local":true}
