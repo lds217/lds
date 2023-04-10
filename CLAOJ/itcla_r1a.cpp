@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "CATPRIME"
+#define task "eratosthene"
 
 using namespace std;
 typedef int64_t ll;
@@ -41,80 +41,45 @@ ll POW(ll a, ll b)
     return b%2==0 ? (tmp*tmp)%mod : (tmp*tmp*a) % mod;
 }
 
-
 //main
 
 
-bool upperPrime(string str){
-	
-	long long x=stoll(str);
-	if(x==0||x==1)
-		return 0;
-	if (x%2==0 && x>2)
-		return 0;
-	
-	else if (x%3==0 && x>3)
-		return 0;
-	else{
-		long long k = (sqrt(x)+1)/6;
-		for (int i=1;i<=k;i++)
-			if ((x%(6*i+1) == 0) && (6*i+1 < x))
-				return 0;
-			else if((x%(6*i-1) == 0) && (6*i-1 < x))
-				return 0;
-	}
-	return 1;
-}
-
-ll d;
-long long a;
+long long L,R;
+bool eratos[50000000];
 
 void input()
 {
-	cin>>d>>a;
+	cin>>L>>R;
+}
+
+void prepare()
+{
+	for (long long i = 2; i * i <= R; ++i) {
+    	for (long long j = max(i * i, (L + i - 1) / i * i); j <= R; j += i) {
+       		eratos[j - L] = 1;
+    	}
+	}
+	if(L<=1)
+		eratos[1-L]=0;
+	
 }
 
 void lds_go_goooo()
 {
-	ll szz=ceil(log10(a));
-	if(szz<2*d)
-		a=pow(10,2*d-1);
-	while(1)
-	{
-		if(a%2==0||a%5==0)
-		{
-			a++;
-			continue;
-		}
-		string str=to_string(a);
-		string tmp1=str,tmp2;
-		tmp1.pop_back();
-		long long sz=str.size();
-		while(tmp1.size()>=d)
-		{
-			tmp1.pop_back();
-			tmp2=tmp2+str[tmp1.size()];
-			cout<<tmp1<<' '<<tmp2<<endl;
-			if(tmp1.size()>=d&&tmp2.size()>=d)
-				if(upperPrime(tmp1)&&upperPrime(tmp2)&&tmp2[0]!='0')
-				{
-					cout<<str;
-					return;
-				}
-		}
-		a++;
-	}
-		
-	
+	prepare();
+	ll cnt=0;
+	FOR(i,L,R)
+		if(eratos[i-L]==0)
+			cnt++;
+	cout<<cnt;
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-  //  freopen(task".INP", "r", stdin);
- 
- //   freopen(task".OUT", "w", stdout);
+    freopen(task".inp", "r", stdin);
+    freopen(task".out", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
