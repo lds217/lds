@@ -17,7 +17,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
+const ll maxn=2*1e3+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -43,25 +43,30 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,a[maxn],b[maxn];
+long long dp[maxn][maxn],a[maxn];
+int n;
 
 void input()
 {
 	cin>>n;
-	FOR(i,1,n)cin>>a[i];
-	FOR(i,1,n)cin>>b[i];
+	FOR(i,1,n)
+		cin>>a[i];
 }
 void lds_go_goooo()
 {
-	sort(a+1,a+1+n);
-	sort(b+1,b+1+n);
-	int ans=0;
+	mset(dp,0x3f);
+	dp[0][0]=0;
 	FOR(i,1,n)
-	if(a[i]==b[i])
-		ans++;
-	else
-		ans+=abs(a[i]-b[i]);
-	cout<<ans;
+		FOR(j,0,n)
+			if(a[i]>100&&j>0)
+				dp[i][j]=min(dp[i-1][j-1]+a[i],dp[i-1][j+1]);
+			else
+				dp[i][j]=min(dp[i-1][j]+a[i],dp[i-1][j+1]);
+	long long ans=inf;
+	FOR(i,0,n)
+		ans=min(ans,dp[n][i]);
+			cout<<ans;
+	
 }
 
 int main()
@@ -70,7 +75,7 @@ int main()
     cin.tie(0);
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    ll test_case=1; cin>>test_case;
+    ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
         input(), lds_go_goooo();

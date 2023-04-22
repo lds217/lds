@@ -17,12 +17,12 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
+const ll maxn=2*1e5+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
-const int moveX[]={0,0,1,-1};
-const int moveY[]={-1,1,0,0};
+const int moveX[]={0,0,1,-1,-1,-1,1,1,0};
+const int moveY[]={-1,1,0,0,-1,1,-1,1,0};
 
 bool maximize(ll &A, ll B)
 {
@@ -43,25 +43,38 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,a[maxn],b[maxn];
+int x,y,u=0,v=0,n;
+bool co=0;
+char a[maxn];
+
 
 void input()
 {
-	cin>>n;
-	FOR(i,1,n)cin>>a[i];
-	FOR(i,1,n)cin>>b[i];
+	cin>>x>>y>>n;
+	FOR(i,1,n)	cin>>a[i];
 }
+
 void lds_go_goooo()
 {
-	sort(a+1,a+1+n);
-	sort(b+1,b+1+n);
-	int ans=0;
+	FOR(i,0,8)
+		if(x+moveX[i]==u&&y+moveY[i]==v)
+			cout<<0<<endl,co=1;
 	FOR(i,1,n)
-	if(a[i]==b[i])
-		ans++;
-	else
-		ans+=abs(a[i]-b[i]);
-	cout<<ans;
+	{
+		if(a[i]=='L')
+			u--;
+		if(a[i]=='R')
+			u++;
+		if(a[i]=='U')
+			v++;
+		if(a[i]=='D')
+			v--;
+		FOR(j,0,8)
+		if(x+moveX[j]==u&&y+moveY[j]==v)
+			cout<<i<<endl,co=1;	
+	}
+	if(co==0)
+		cout<<-1;
 }
 
 int main()
@@ -70,7 +83,7 @@ int main()
     cin.tie(0);
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    ll test_case=1; cin>>test_case;
+    ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
         input(), lds_go_goooo();

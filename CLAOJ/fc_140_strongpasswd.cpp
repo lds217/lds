@@ -43,25 +43,41 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,a[maxn],b[maxn];
+string str;
+bool len,up,low,num,spec,dupl=1;
+
+string specialcharater="!@#$%^&*()-+";
 
 void input()
 {
-	cin>>n;
-	FOR(i,1,n)cin>>a[i];
-	FOR(i,1,n)cin>>b[i];
+	cin>>str;
 }
 void lds_go_goooo()
 {
-	sort(a+1,a+1+n);
-	sort(b+1,b+1+n);
-	int ans=0;
-	FOR(i,1,n)
-	if(a[i]==b[i])
-		ans++;
+	if(str.size()>=8)
+		len=1;
+	FOR(i,0,str.size()-1)
+	{
+		if(str[i]>='0'&&str[i]<='9')
+			num=1;
+		if(str[i]>='a'&&str[i]<='z')
+			low=1;
+		if(str[i]>='A'&&str[i]<='Z')
+			up=1;
+		if(spec==0)
+			for(char a:specialcharater)
+				if(str[i]==a)
+				{
+					spec=1;
+					break;	
+				}
+		if(str[i]==str[i+1])
+			dupl=0;
+	}
+	if(len==1&&up==1&&low==1&&num==1&&spec==1&&dupl==1)
+		cout<<"YES";
 	else
-		ans+=abs(a[i]-b[i]);
-	cout<<ans;
+		cout<<"NO";
 }
 
 int main()
@@ -70,7 +86,7 @@ int main()
     cin.tie(0);
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    ll test_case=1; cin>>test_case;
+    ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
         input(), lds_go_goooo();

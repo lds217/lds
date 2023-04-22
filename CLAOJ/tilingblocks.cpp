@@ -11,13 +11,13 @@
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
 #define task "SUADUONG"
-
+#define int long long
 using namespace std;
 typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
+const ll maxn=2*1e5+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -43,28 +43,33 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,a[maxn],b[maxn];
+ii a[maxn];
+int n;
 
 void input()
 {
 	cin>>n;
-	FOR(i,1,n)cin>>a[i];
-	FOR(i,1,n)cin>>b[i];
-}
-void lds_go_goooo()
-{
-	sort(a+1,a+1+n);
-	sort(b+1,b+1+n);
-	int ans=0;
 	FOR(i,1,n)
-	if(a[i]==b[i])
-		ans++;
-	else
-		ans+=abs(a[i]-b[i]);
-	cout<<ans;
+		cin>>a[i].fi>>a[i].se;
 }
 
-int main()
+void lds_go_goooo()
+{
+	sort(a+1,a+n+1);
+	vector<int> b(n+1, INT_MAX);
+	int ans=0;
+	b[0]=INT_MIN;
+	FOR(i,1,n)
+	{
+		int k=upper_bound(ALL(b),a[i].se)-b.begin();
+		b[k]=a[i].second;
+		ans=max(ans,k);
+	}
+	cout<<ans;
+	
+}
+
+signed main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);

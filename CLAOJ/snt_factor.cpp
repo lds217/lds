@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+#define task "FACTOR"
 
 using namespace std;
 typedef int64_t ll;
@@ -42,38 +42,53 @@ ll POW(ll a, ll b)
 }
 
 //main
+int minprime[10000005];
+int n;
+void prepare()
+{
+	mset(minprime,0);
+	for(int i=2;i*i<=1e7;i++)
+		if(minprime[i]==0)
+			for(int j=i*i;j<=1e7;j+=i)
+				if(minprime[j]==0)
+					minprime[j]=i;
+	for(int i=2;i<=1e7;i++)
+			if(minprime[i]==0)
+				minprime[i]=i;
+}
 
-int n,a[maxn],b[maxn];
+
 
 void input()
 {
 	cin>>n;
-	FOR(i,1,n)cin>>a[i];
-	FOR(i,1,n)cin>>b[i];
 }
 void lds_go_goooo()
 {
-	sort(a+1,a+1+n);
-	sort(b+1,b+1+n);
-	int ans=0;
-	FOR(i,1,n)
-	if(a[i]==b[i])
-		ans++;
-	else
-		ans+=abs(a[i]-b[i]);
-	cout<<ans;
+
+	while(n!=1)
+	{
+		cout<<minprime[n];
+		n/=minprime[n];
+		if(n!=1)
+			cout<<'*';
+	}
+
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
+    freopen(task".INP", "r", stdin);
+    freopen(task".OUT", "w", stdout);
+    prepare();
     ll test_case=1; cin>>test_case;
     while(test_case--)
     {
-        input(), lds_go_goooo();
+    	//FOR(i,2,15)
+    	//	cout<<minprime[i]<<' ';
+        input(); lds_go_goooo();
         cout<<'\n';
     }
     return 0;

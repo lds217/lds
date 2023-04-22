@@ -43,25 +43,35 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,a[maxn],b[maxn];
+bool eratos[10000005];
+vector <long long> dmt;
+int l,r;
+
+void prepare()
+{
+
+	for(int i=2;i*i<=1e6;i++)
+		if(eratos[i]==0)
+		{
+			if(i!=3)
+				dmt.pb(9*i*i);
+			for(int j=i*i;j<=1e6;j+=i)
+				eratos[j]=1;
+		}
+}
 
 void input()
 {
-	cin>>n;
-	FOR(i,1,n)cin>>a[i];
-	FOR(i,1,n)cin>>b[i];
+	cin>>l>>r;
 }
 void lds_go_goooo()
 {
-	sort(a+1,a+1+n);
-	sort(b+1,b+1+n);
-	int ans=0;
-	FOR(i,1,n)
-	if(a[i]==b[i])
-		ans++;
-	else
-		ans+=abs(a[i]-b[i]);
-	cout<<ans;
+	prepare();
+	int u=upper_bound(ALL(dmt),l)-dmt.begin();
+	int v=upper_bound(ALL(dmt),r)-dmt.begin()-1;
+	//for(int i:dmt)	cout<<i<<' ';
+	//cout<<endl;
+	cout<<v-u+1;
 }
 
 int main()
@@ -70,7 +80,7 @@ int main()
     cin.tie(0);
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    ll test_case=1; cin>>test_case;
+    ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
         input(), lds_go_goooo();

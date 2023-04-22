@@ -43,25 +43,37 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,a[maxn],b[maxn];
+long long n,k,type;
 
 void input()
 {
-	cin>>n;
-	FOR(i,1,n)cin>>a[i];
-	FOR(i,1,n)cin>>b[i];
+	
 }
 void lds_go_goooo()
 {
-	sort(a+1,a+1+n);
-	sort(b+1,b+1+n);
-	int ans=0;
-	FOR(i,1,n)
-	if(a[i]==b[i])
-		ans++;
+	cin>>type;
+	if(type==1)
+	{
+		cin>>n>>k;
+		vector<int> ans;
+		while(n>0)
+		{
+			ans.pb(n%k);
+			n/=k;
+		}
+		reverse(ALL(ans));
+		for(int i:ans)
+			cout<<i;
+	}
 	else
-		ans+=abs(a[i]-b[i]);
-	cout<<ans;
+	{
+		string str;
+		cin>>str>>k;
+		long long ans=0;
+			FOR(i,0,str.size()-1)
+				ans=ans*k+str[i]-'0';
+		cout<<ans;
+	}
 }
 
 int main()
@@ -70,7 +82,7 @@ int main()
     cin.tie(0);
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    ll test_case=1; cin>>test_case;
+    ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
         input(), lds_go_goooo();
