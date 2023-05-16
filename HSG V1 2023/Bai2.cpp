@@ -17,7 +17,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e6+2;
+const ll maxn=2*5*1e5+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -43,27 +43,40 @@ ll POW(ll a, ll b)
 
 //main
 
-long long n,sum=0,a[maxn];
+long long a[maxn];
+long long n,sum=0,dp[maxn];
 
 void input()
 {
 	cin>>n;
-	FOR(i,1,n)	cin>>a[i],sum+=a[i];
+	FOR(i,1,2*n-1)
+		cin>>a[i],sum+=a[i];
+	
 }
 void lds_go_goooo()
 {
-	sort(a+1,a+n+1);
-	FOR(i,1,ceil(n/2))
-		sum+=a[n-i+1]-a[i];
-	cout<<sum;
+	cout<<-sum<<' ';
+	mset(dp,0);
+	dp[0]=dp[1]=0;
+	long long ans=0;
+	FOR(i,1,2*n-1)
+	{
+		if(a[i]==sum)
+			ans++;
+		if(a[i]==-a[i-1])
+			dp[i]=dp[i-2]+1;
+	}
+	cout<<ans<<endl;
+	cout<<*max_element(dp+1,dp+2*n);
+			
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen("NHIET.INP", "r", stdin);
-    //freopen("7.out", "w", stdout);
+    //freopen("30.inp", "r", stdin);
+    //freopen("30.out", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

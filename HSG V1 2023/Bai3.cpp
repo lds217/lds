@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+#define task "40"
 
 using namespace std;
 typedef int64_t ll;
@@ -43,54 +43,41 @@ ll POW(ll a, ll b)
 
 //main
 
-long long n;
-
+char s1[100001],s2[1000001];
+int n;
 void input()
 {
 	cin>>n;
+	FOR(i,1,n)
+		cin>>s1[i];
+	FOR(i,1,n)
+		cin>>s2[i];
 }
-
-long long sumdigit(long long x)
-{
-	long long sum=0;
-	while(x>0)
-	{
-		sum+=(x%10)*(x%10);
-		x/=10;
-	}
-	return sum;
-}
-
-bool check(long long x)
-{
-	bool dup[9*9*16+1];
-	mset(dup,0);
-	long long sum=sumdigit(x);
-	while(dup[sum]==0)
-	{
-		dup[sum]=1;
-		sum=sumdigit(sum);
-		if(sum==1)
-			return 1;
-	}
-	return 0;
-}
-
 void lds_go_goooo()
 {
-	n++;
-	while(!check(n))
-		n++;
-	cout<<n;
-	
+	int ans=0;
+	s1[0]=s2[0]=s1[n+1]=s2[n+1]='0';
+	FOR(i,0,n-1)
+	{
+		if(s1[i]==s1[i+2]&&s1[i]!=s1[i+1]&&s2[i]==s2[i+2]&&s2[i]!=s2[i+1])
+		{
+			s1[i+1]='0'+'1'-s1[i+1];
+			s2[i+1]='0'+'1'-s2[i+1];
+			ans++;
+		}
+		if(s1[i]=='0'&&s1[i+1]=='1')	ans++;
+		if(s2[i]=='0'&&s2[i+1]=='1')	ans++;
+	}
+	cout<<ans;
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen("6.inp", "r", stdin);
-    //freopen("6.out", "w", stdout);
+    
+    freopen("lights.in.10", "r", stdin);
+   //freopen(task".out", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

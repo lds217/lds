@@ -23,24 +23,25 @@ long long Rand(long long l, long long h)
 #define K 1000000000
 #define W 100000
 #define T 10
+
+vector <long long> tmp;
+int i;
 void sinh(int x)
 {
+
     ofstream os;
     ofstream inp((to_string(x) + ".inp").c_str());
-    long long a, c, h, k, n, m, q, t, w;
-    n = Rand(1, A);
-    inp << n << endl;
-    //for (int i=1; i<=n; i++)
-    //{
-    //    a= Rand(1, H);
-    //    inp << a << ' ';
-    //}
-}
+    long long n=Rand(1,10);
+    FOR(i,1)
+    inp<<400000000;
+    
+
+}			
 
 int main(){
     ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     srand(time(NULL));
-    for (int i=5; i<=6; i++)
+    for (i=1; i<=30; i++)
     {
         sinh(i);
     }
