@@ -20,7 +20,6 @@ long long Rand(long long l, long long h)
 #define N 1000
 #define Q 100000
 #define X 2000000000
-#define K 1000000000
 #define W 100000
 
 vector <long long> tmp;
@@ -30,36 +29,32 @@ void sinh(int x)
 
     ofstream os;
     ofstream inp((to_string(x) + ".inp").c_str());
-	int t=2*1e6;
-	inp<<t<<endl;
-	deque <int> a;
-	vector <int> b;
-	for(int i=0;i<t;i++)
+	int q=Rand(10000,100000);
+	if(x==30)
+		q=100000;
+	inp<<q<<endl;
+	while(q--)
 	{
-		if(Rand(1,100000)%2==0||Rand(1,100000)%5==0)
-			a.push_front(i);
+		int R=Rand(1000000,1000000000),L=Rand(1,10000),D=Rand(1,min(R-L+1,10000)),K;
+		if(Rand(1,100000)%2)
+			K=Rand(L,R);
 		else
-			a.push_back(i);
+		{
+			if(Rand(1,100000)%2)
+				K=Rand(R,100000);
+			else
+				K=Rand(1,L);	
+		}
+		inp<<L<<' '<<R<<' '<<D<<' '<<K<<endl;
 	}
-	while(!a.empty())
-	{
 	
-		b.push_back(a.front());
-		a.pop_front();		
-	}
-	int l=Rand(1,10000),r=Rand(1,10000);
-	while(l>=r||r>=t)
-		l=Rand(1,10000),r=Rand(1,10000);
- 	shuffle(b.begin()+l, b.begin()+r, default_random_engine(0));
-	for(int i: b)
-		inp<<i<<' ';
 
 }			
 
 int main(){
     ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     srand(time(NULL));
-    for (i=29; i<=30; i++)
+    for (i=16; i<=30; i++)
     {
         sinh(i);
     }

@@ -17,7 +17,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
+const ll maxn=2*1e6+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -42,101 +42,84 @@ ll POW(ll a, ll b)
 }
 
 //main
-long long x[500005],y[500005];
-long long d[500005];
-bool eratos[10000000];
-vector <long long> k[500005];
+int vs[maxn],y[maxn];
+vector <long long> k[maxn];
 long long m,n,p;
-long long dupx[100000],dupy[1000000];
+bool eratos[maxn];
+
 void pre_era()
 {
 	mset(eratos,0);
 	eratos[0]=eratos[1]=1;
-	for(int i=2;i*i<=1e6;i++)
+	for(int i=2;i*i<=2e6;i++)
 		if(eratos[i]==0)
-			for(int j=i*i;j<=1e6;j+=i)
+			for(int j=i*i;j<=2e6;j+=i)
 				eratos[j]=1;
 }
-
+	int a[100001];
 void input()
 {
 	pre_era();
-	long long tmp;
-	cin>>tmp;
-	int a[100001];
-	m=tmp;
-	FOR(i,1,tmp)	cin>>a[i];
-	int track=1;
-	FOR(i,1,tmp-1)
-		FOR(j,i+1,tmp)
-			if(i!=j)
-			if(eratos[a[i]+a[j]]==0)
-			{
-
-				k[i].pb(j);
-			}
-	FOR(i,1,m)
-	{
-		cout<<i<<" ";
-		for(int j:k[i])
-			cout<<j<<' ';
-		cout<<endl;
-	}
+	cin>>n;
+	FOR(i,1,n)	cin>>a[i];
 }
 
-bool bfs()
-{
-	queue <int> q;
-	FOR(i,1,m)
-		if(x[i]==0)
-			d[i]=0,q.push(i);
-		else
-			d[i]=1e9;
-	d[0]=1e9;
-	while(!q.empty())
-	{
-		int u=q.front();q.pop();
-		if(d[u]<d[0])
-			for(int v: k[u])
-				if(d[y[v]]>=1e9)
-				{
-					d[y[v]]=d[u]+1;
-					q.push(y[v]);
-				}
-	}
-	
-	return (d[0]<1e9);
-}
 
-bool dfs(int u)
+int t;
+
+bool dfs(int i)
 {
-	if(u==0)	return 1;
-	for(int v:k[u])
-		if(d[y[v]]==d[u]+1)
-			if(dfs(y[v]))
-			{
-				x[u]=v;
-				y[v]=u;
-				return 1;
-			}
-	d[u]=1e9;
+	if(vs[i]!=t)
+		vs[i]=t;
+	else
+		return 0;
+	for(int v:k[i])
+		if(y[v]==0||dfs(y[v]))
+		{
+			y[v]=i;
+			return 1;
+		}
 	return 0;
 }
 
 void lds_go_goooo()
 {
-	int cnt=0;
-	
-	while(bfs())
-	{	
-		FOR(i,1,m)
-			if(x[i]==0)
-				if(dfs(i))
-					cnt++;
+	FOR(i,1,n)
+		FOR(j,1,n)
+			if(a[i]!=1&&a[j]!=1)
+			if(eratos[a[i]+a[j]]==0)
+					k[i].pb(j);
+	FOR(i,1,n)
+		FOR(j,1,n)	
+			if(a[i]%2==1||a[j]!=1)	continue;
+			else	if(!eratos[a[i]+a[j]])	k[i].pb(j),k[j].pb(i);
+	ll cnt=0,tmp=0;
+	FOR(i,1,n)
+	{
+		if(a[i]%2==1)	continue;
+		t++;
+		cnt+=dfs(i);
 	}
-	FOR(i,0,m)
-	cout<<i<<' '<<x[i]<<endl;
-	cout<<cnt-1;
+	bool married[maxn];
+	vector <ll> one;
+	FOR(i,1,n)
+	{
+		if(y[i]==0)	continue;
+		married[i]=1;
+		married[y[i]]=1;
+	}
+	FOR(i,1,n)
+	{
+		if(!married[i]&&a[i]==1)
+			one.pb(i),tmp++;			
+	}
+	cnt+=tmp/2;
+	cout<<cnt<<endl;
+	FOR(i, 0, (tmp/2)-1) cout<<one[i*2]<<' '<<one[i*2+1]<<'\n';
+	FOR(i,1,n)
+		if(y[i]!=0)
+		cout<<i<<' '<<y[i]<<endl;
+	
 }
 
 int main()
@@ -153,3 +136,5 @@ int main()
     }
     return 0;
 }
+
+//Dont ask me why this code works, go ask Kieu Phat

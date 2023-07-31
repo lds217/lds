@@ -43,7 +43,7 @@ ll POW(ll a, ll b)
 
 //main
 
-int pos[maxn],n,l,r;
+
 
 void input()
 {
@@ -58,36 +58,29 @@ int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-
-		
-	//	ifstream inp((to_string(i) + ".inp").c_str());
-	//	ofstream ou((to_string(i) + ".out").c_str());
-		mset(pos,0);
-	    ll test_case=1; //cin>>test_case;
-	    while(test_case--)
-	    {
-	        cin>>n;
-	FOR(i,0,n-1)
+	int n,d;
+	string str;
+	FOR(i,1,30)	
 	{
-		int u;
-		cin>>u;
-		pos[u]=i;
-	} 
-	     l=r=pos[0];
-	int ans=0,len=1;
-	FOR(i,1,n)
+		ifstream inp((to_string(i) + ".inp").c_str());
+		ofstream ou((to_string(i) + ".out").c_str());
+		inp>>n>>d;
+		inp>>str;
+		FOR(i,0,n-1)
 	{
-		if(pos[i]<l||pos[i]>r)
+		if(str[i]-'0'>=d)
+			ou<<str[i];
+		else
 		{
-			if(i==len)
-				ans++;
-			l=min(l,pos[i])	;
-			r=max(r,pos[i]);
-			len=r-l+1;
+			ou<<d;
+			FOR(j,i,n-1)
+				ou<<str[j];
+			break;
 		}
+		if(i==n-1)
+			ou<<d;	
 	}
-	cout<<ans+1;   
-	    }
+	}
 	
     return 0;
 }
