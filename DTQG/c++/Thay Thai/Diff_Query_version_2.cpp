@@ -238,12 +238,4 @@ int main()
     }
     return 0;
 }
-/*
- d8b d8b
-888888888
-`Y88888P'       "Heart"
- `Y888P'      Le Thanh Dat
-  `Y8P'
-   `Y'
 
-*/
