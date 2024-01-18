@@ -1,0 +1,1 @@
+{"name":"Local: coutprime","url":"/Users/lethanhdat/Desktop/code c++/coutprime.cpp","tests":[{"id":1661330968590,"input":"3\n4 10\n7 20\n2 30","output":"2\n5\n10"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/lethanhdat/Desktop/code c++/coutprime.cpp","group":"local","local":true}

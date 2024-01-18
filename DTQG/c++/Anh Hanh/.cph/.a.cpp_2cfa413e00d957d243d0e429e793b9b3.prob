@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"/Users/lethanhdat/Documents/c++/Anh Hanh/a.cpp","tests":[{"id":1699060932438,"input":"3\n2 1 0\n3 4 3\n5 0 0\n","output":"1 1 5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/lethanhdat/Documents/c++/Anh Hanh/a.cpp","group":"local","local":true}

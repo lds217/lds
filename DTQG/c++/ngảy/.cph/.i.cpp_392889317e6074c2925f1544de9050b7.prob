@@ -1,0 +1,1 @@
+{"name":"Local: i","url":"/Users/lethanhdat/Documents/c++/ngảy/i.cpp","tests":[{"id":1698832054284,"input":"4 3\n1 1 1\n1 2 3\n2 2 2\n2 1 1","output":"3\n1 1\n2 2 3\n1 4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/lethanhdat/Documents/c++/ngảy/i.cpp","group":"local","local":true}

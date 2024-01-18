@@ -9,7 +9,7 @@ using namespace std;
 
 #define mp make_pair
 #define pb push_back
-#define fi first
+
 #define se second
 #define FOR(i, a, b) for(int i = (a), _b = (b); i <= _b; ++i) 
 #define FORD(i, a, b) for(int i = (a), _b = (b); i >= _b; --i)
@@ -44,7 +44,7 @@ bool maximize(T &a, T b) {
 
 /***End of Template***/
 const int T = 40;
-const string task = "ts10_ht_23_3"; /*type taskname here*/
+const string task = "present"; /*type taskname here*/
 const string folderName = "E:\\lds\\lds\\Author\\" + task + "\\";
 
 long long Rand(long long l, long long h)
@@ -66,74 +66,82 @@ void GenInput() {
 	FOR(o,1,T)
 	{
 		Gen(o);
-		if(o<=23)
+		if(o<=8)
 		{
-			ll n=Rand(1,1000);
-			ll ans=Rand(1,10000);
+			int n=Rand(4,10);
 			cout<<n<<endl;
+			vector<int> bias;
 			FOR(i,1,n)
-			{
-				if(Rand(1,1000)%5==0)
-					cout<<0<<' ';
+				if(Rand(1,1000)%2||!Rand(1,1000)%2||bias.empty())
+				{
+					int u=Rand(1,10000);bias.push_back(u);
+					cout<<u<<' ';
+				}
 				else
-					if(ans%2)
-						cout<<(Rand(1,10000)%2||Rand(1,54545)%5?1:-1)*Rand(1,1000000000)<<' ';
-					else
-						cout<<(Rand(1,10000)%2||Rand(1,54545)%5?-1:1)*Rand(1,1000000000)<<' ';
-			}
+					cout<<bias[Rand(1,bias.size())-1]<<' ';
 		}
 		else
-		{	if(o==24)
-			{
-				ll n=Rand(1,1000);
-				cout<<n<<endl;
-				FOR(i,1,n)
-					cout<<0<<' ';
-			}
-			else
-			{
-			
-				ll n=Rand(1,1000000);
-				ll ans=Rand(1,10000);
-				cout<<n<<endl;
-				FOR(i,1,n)
-				{
-					if(Rand(1,1000)%5==0)
-						cout<<0<<' ';
-					else
-						if(ans%2)
-							cout<<(Rand(1,10000)%2||Rand(1,54545)%5?1:-1)*Rand(1,1000000000)<<' ';
-						else
-							cout<<(Rand(1,10000)%2||Rand(1,54545)%5?-1:1)*Rand(1,1000000000)<<' ';
+		if(o<=16)
+		{
+			int n=Rand(1,1000);
+			cout<<n<<endl;
+			vector<ll> bias;
+			FOR(i,1,n)
+				if(Rand(1,1000)%5||bias.empty())
+					{
+					int u=Rand(1,100000000);bias.push_back(u);
+					cout<<u<<' ';
 				}
+				else
+					cout<<bias[Rand(1,bias.size())-1]<<' ';
+		}
+		else
+		{
+			if(o==23)
+			{
+					int n=Rand(1,200000);
+						cout<<n<<endl;
+						FOR(i,1,n)
+							cout<<69<<' ';
+						continue;
 			}
+			int n=Rand(1,200000);
+			cout<<n<<endl;
+			vector<ll> bias;
+			FOR(i,1,n)
+				if(Rand(1,1000)%5==0||bias.empty())
+					{
+					int u=Rand(1,1000000000);bias.push_back(u);
+					cout<<u<<' ';
+				}
+				else
+					cout<<bias[Rand(1,bias.size())-1]<<' ';
 		}
 	}
 }
 fstream fi;
-ll n,a[1000050];
+
 void Input()
 {
+	map<long long,ll> a;
+	int n;
 	fi>>n;
-	FOR(i,1,n)	fi>>a[i];
-	ll pos=1,flag=0;
-	ll ans=0;
-
+	ll maxx=0;
 	FOR(i,1,n)
-		if(a[i]*flag<=0)
 		{
-			ans=max(ans,i-pos+1);
-			pos=i;
-			flag=a[i]; 
+			int u;
+			fi>>u;
+			maxx=max(++a[u],maxx);
 		}
-	cout<<ans;
+	cout<<maxx;
 }
+	
 // 
 // 0 0 0 0 0 0 
 
 void Solve()
 {
-	
+
 }
 
 void GenOutput() {

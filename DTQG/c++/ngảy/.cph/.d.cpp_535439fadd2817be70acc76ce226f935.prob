@@ -1,0 +1,1 @@
+{"name":"Local: d","url":"/Users/lethanhdat/Documents/c++/ngảy/d.cpp","tests":[{"id":1698825798875,"input":"3\n2 6 9","output":"3"},{"id":1698825804876,"input":"4\n3 2 6 9","output":"6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/lethanhdat/Documents/c++/ngảy/d.cpp","group":"local","local":true}

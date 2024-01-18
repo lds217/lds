@@ -1,0 +1,1 @@
+{"name":"Local: dom","url":"/Users/lethanhdat/Documents/c++/ngảy/dom.cpp","tests":[{"id":1698911633293,"input":"2 2 2\n0000\n1111\n1 1\n2 2","output":"2\n1 2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/lethanhdat/Documents/c++/ngảy/dom.cpp","group":"local","local":true}

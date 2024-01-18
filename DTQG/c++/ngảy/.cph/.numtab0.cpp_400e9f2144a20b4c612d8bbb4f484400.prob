@@ -1,0 +1,1 @@
+{"name":"Local: numtab0","url":"/Users/lethanhdat/Documents/c++/ngảy/numtab0.cpp","tests":[{"id":1698893201553,"input":"2\n-1 1\n1 -1","output":"1\n1 1 2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/lethanhdat/Documents/c++/ngảy/numtab0.cpp","group":"local","local":true}

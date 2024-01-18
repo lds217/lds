@@ -17,7 +17,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
+const ll maxn=2*1e5+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -44,15 +44,72 @@ ll POW(ll a, ll b)
 //main
 
 int n;
-
+int x[maxn],t[maxn],ans[maxn],bit[MASK(18)+5];
 void input()
 {
+	cin>>n;
+	FOR(i,1,n)
+		cin>>x[i];
+	FOR(i,1,n)
+		cin>>t[i];
+		
+}
 
+int get(int x)
+{
+	int sum=0;
+	while(x>0)
+	{
+		sum+=bit[x];
+		x-=x&(-x);
+	}
+	return sum;
+}
+
+void update(int x,int val)
+{
+	while(x<n)
+	{
+		bit[x]+=val;
+		x+=x&(-x);
+	}
+}
+
+ll find(ll val)
+{
+    ll j=0, sum=0;
+    FORD(i, 18, 0)
+    {
+        if (j+MASK(i)<n && sum + bit[j+MASK(i)]<val)
+        {
+            sum+=bit[j+MASK(i)];
+            j+=MASK(i);
+        }
+    }
+    return j+1;
 }
 
 void lds_go_goooo()
 {
-
+//	update(6);
+	FOR(i,1,n)
+	{
+		ans[i]=get(n-x[i]);
+		update(n-x[i]+1,1);
+	}
+	FOR(i,1,n)
+		cout<<ans[i]<<" ";
+	mset(bit,0);
+	cout<<endl;
+	FOR(i,1,n)	update(i,1);
+	FOR(i,1,n)
+	{
+		ll pos=find(t[i]+1);
+		ans[pos]=i;
+		update(pos,-1);
+	}
+	FOR(i,1,n)	cout<<ans[i]<<' ';
+		
 }
 
 int main()

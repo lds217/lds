@@ -1,74 +1,80 @@
-// Template //
-#include <bits/stdc++.h>
-#define FOR(i, a, b) for(ll i=a, _b=b; i<=_b; i++)
-#define FORD(i, a, b) for(ll i=a, _b=b; i>=_b; i--)
+
+#include<bits/stdc++.h>
+
+#define ll long long
+#define ld long double
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define vi vector<int>
+#define vll vector<ll>
+#define vb vector<bool>
+#define BIT(S, i) (((S) >> (i) & 1))
+#define MASK(i) ((1ll) << (i))
+
 #define pb push_back
-#define ALL(a) a.begin(), a.end()
-#define mp make_pair
-#define fi first
-#define se second
-#define mset(a, b) memset(a, b, sizeof(a))
-#define MASK(i) (1LL<<(i))
-#define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
-
+#define all(v) v.begin(), v.end()
+#define rall(v) v.rbegin(), v.rend()
+#define loop(i, a, b) for(int i = a; i <= b; i++)
+#define countloop(i, a, b) for(i = a; i <= b; i++)
+#define rloop(i, a, b) for(int i = a; i >= b; i--)
+#define rcountloop(i, a, b) for(i = a; i >= b; i--)
+#define line '\n'
+#define bruhhhhhhhhhhhhhhhhhh for(;;)
 using namespace std;
-typedef int64_t ll;
-typedef long double ld;
-typedef pair<ll, ll> ii;
-typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
-const ll mod=26051968;
-const ll inf=1e18;
 
-const int moveX[]={0,0,1,-1};
-const int moveY[]={-1,1,0,0};
+const int MAX_N = 3005;
+const int MAX_C = 27;
+int n, cnt;
+bool vst[MAX_C], check[MAX_C][MAX_C];
+vi adlist[MAX_C];
+string arr[MAX_N];
+char c, res[MAX_C];
 
-bool maximize(ll &A, ll B)
-{
-    return A<B ? A=B, true : false;
-}
+void trace(int x){
+    if(vst[x]) return;
 
-bool minimize(ll &A, ll B)
-{
-    return A>B ? A=B, true : false;
-}
-
-ll POW(ll a, ll b)
-{
-    if (b==0) return 1;
-    ll tmp=POW(a, b/2);
-    return b%2==0 ? (tmp*tmp)%mod : (tmp*tmp*a) % mod;
-}
-
-//main
-
-
-
-void input()
-{
-	int a[]={0,1,4,6,5};
-	int sum=0;
-	FOR(i,1,4)
-		sum+=a[i];
-	cout<<(sum^2);
-}
-void lds_go_goooo()
-{
-
-}
-
-int main()
-{
- 	ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
-    ll test_case=1; //cin>>test_case;
-    while(test_case--)
-    {
-        input(), lds_go_goooo();
-        cout<<'\n';
+    for(int j : adlist[x]){
+        if(check[x][j] && check[j][x]){
+            cout << "Impossible";
+            exit(0);
+        }
+        if(check[j][x]) trace(j);
     }
+
+    res[++cnt] = (char)(x + 'a');
+    vst[x] = true;
+}
+
+void checku(string x, string y){
+    loop(id, 0, min(x.size(), y.size()) - 1){
+        if(x[id] != y[id]){
+            if(!check[x[id] - 'a'][y[id] - 'a']){
+                check[x[id] - 'a'][y[id] - 'a'] = 1;
+                adlist[y[id] - 'a'].pb(x[id] - 'a');
+            }
+            return;
+        }
+    }
+}
+
+void Shuba(){
+    cin >> c >> n;
+    loop(i, 1, n) cin >> arr[i];
+
+    loop(i, 1, n - 1){
+            checku(arr[i], arr[i + 1]);
+    }
+
+    loop(i, 0, c - 'a') trace(i);
+    loop(i, 1, cnt) cout << res[i];
+}
+
+signed main()
+{
+    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+
+    Shuba();
     return 0;
 }

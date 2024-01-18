@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+
 
 using namespace std;
 typedef int64_t ll;
@@ -38,61 +38,27 @@ ll POW(ll a, ll b)
 {
     if (b==0) return 1;
     ll tmp=POW(a, b/2);
-    return b%2==0 ? (tmp*tmp)%mod : (tmp*tmp*a) % mod;
+    return b%2==0 ? (tmp*tmp)%mod : ((tmp*tmp)%mod *a) % mod;
 }
 
 //main
 
-ll n,m,p,l,k;
-vector<ii> adj[maxn];
-ll dp[maxn][15][15];
-
 void input()
 {
-	cin>>n>>m>>p>>l>>k;
-	FOR(i,1,m)
-	{
-		int u,v,w; cin>>u>>v>>w;
-		adj[u].pb({v,w});
-		adj[v].pb({u,w});
-	}
-}
-struct lds{
-	ll cost,node,dis,used;
-};
 
-struct cmp {
-	bool operator()(lds const& n1, lds const& n2)
-	    return n1.cost < n2.cost;
-};
+}
+
+
 void lds_go_goooo()
 {
-	priority_queue< lds, vector<lds>,cmp> q;
-	mset(dp,0x3f);
-	q.push({0,1,0,0});
-	dp[1][0][0]=0;
-	while(!q.empty())
-	{
-		auto [nw,u,nl,nk]= q.top(); q.pop();
-		if(nw!=f[u][nl][nk])	continue;
-		if(u==n)
-		{
-			cout<<w1<<endl;
-			return;
-		}
-		for(auto[v,w]: adj[u])
-		{
-			if(nl>0&&nl<0&&minimize(f[v][nl+1][nk],nw))
-				q.push({f[v][nl+1][nk],v,nl+1,nk});
-			if(k1<k&&minimize(f))
-		}
-	}
+	
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
+    #define task "SUADUONG"
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;

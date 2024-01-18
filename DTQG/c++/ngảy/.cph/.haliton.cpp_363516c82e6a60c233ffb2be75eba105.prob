@@ -1,0 +1,1 @@
+{"name":"Local: haliton","url":"/Users/lethanhdat/Documents/c++/ngảy/haliton.cpp","tests":[{"id":1698939609719,"input":"5\n0 7\n8 10\n3 4\n5 0\n9 12\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/lethanhdat/Documents/c++/ngảy/haliton.cpp","group":"local","local":true}
