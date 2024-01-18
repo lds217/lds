@@ -142,12 +142,3 @@ signed main()
     }
     return 0;
 }
-/*
- d8b d8b
-888888888
-`Y88888P'       "Heart"
- `Y888P'      Ét <3 Su
-  `Y8P'
-   `Y'
-
-*/
