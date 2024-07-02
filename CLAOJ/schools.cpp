@@ -69,7 +69,7 @@ void lds_go_goooo()
 	key[idx++]=to_string(num);
 	
 	k[key[idx-1]]++;
-	cout<<idx-1<<" "<<key[idx-1]<<" "<<	k[key[idx-1]]<<endl;
+	//cout<<idx-1<<" "<<key[idx-1]<<" "<<	k[key[idx-1]]<<endl;
 }
 
 int main()
@@ -92,7 +92,7 @@ int main()
     		ans.insert(stoi(key[i]));
 
     cout<<ans.size()<<endl;
-    for(string s: ans)
+    for(int s: ans)
     	cout<<s<<endl;
     return 0;
 }

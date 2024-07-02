@@ -100,7 +100,7 @@ void lds_go_goooo()
 	FOR(i,0,hull.size()-2)
 		if(i==0||i==hull.size()-1||!dc(hull[i-1],hull[i],hull[i+1]))
 			cnt++;
-	cout<<cnt-1<<"\n";
+	cout<<cnt<<"\n";
 	long long area=0;
 	hull.pb(hull[0]);
 	FOR(i,0,hull.size()-2)

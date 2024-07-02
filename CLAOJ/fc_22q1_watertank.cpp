@@ -13,7 +13,7 @@
 #define task "SUADUONG"
 
 using namespace std;
-typedef int64_t ll;
+typedef long long ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;

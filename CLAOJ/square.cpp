@@ -51,15 +51,14 @@ void input()
 }
 void lds_go_goooo()
 {
-	long long ans=1e9;
+	long long ans=1e18;
 	if(k==0)
 	{
 		cout<<0;
 		return;
 	}
-	long long n=sqrt(abs(k));
-	
-		for(int i=1;i<=n+1;i++)
+	unsigned long long n=0;
+		for(long long i=1;i*i<=abs(k);i++)
 		{
 			if(k%i==0)
 			{
@@ -72,10 +71,11 @@ void lds_go_goooo()
 				b=-b;
 				if((a+b)%2==0&&a+b>=0)
 					ans=min(ans,(a+b)/2);
-				
 			}
 		}
-	
+	if(ans==1e18)
+		cout<<"none";
+	else
 		cout<<ans;
 }
 

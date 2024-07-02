@@ -51,25 +51,7 @@ long long maxx=0;
 void input()
 {
 	cin>>n;
-	FOR(i,1,n)	cin>>a[i],ck[a[i]]+=a[i],maximize(maxx,a[i]);
-}
-
-void sub1()
-{
-	long long res=0,ans=0;
-	FOR(i,0,MASK(n))
-	{
-		mset(ck,0);
-		FOR(j,0,n-1)
-			if(BIT(i, j))
-				ck[a[j+1]]=ck[a[j+1]+1]=ck[a[j+1]-1]=1;
-		
-		FOR(j,1,n)
-			if(ck[a[j]]==0)
-				res+=a[j];
-		ans=max(ans,res);
-	}
-	cout<<ans;
+	FOR(i,1,n)	cin>>a[i],ck[a[i]]+=a[i],maxx=max(maxx,a[i]);
 }
 
 void sub3()
@@ -82,9 +64,9 @@ void sub3()
 
 void lds_go_goooo()
 {
-	if(n<=15) sub1();
-	else	sub3();
-
+	//if(n<=15) sub1();
+//	else	sub3();
+	sub3();
 }
 
 int main()

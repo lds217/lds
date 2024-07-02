@@ -145,8 +145,8 @@ int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
+    freopen(task".INP", "r", stdin);
+    freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

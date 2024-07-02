@@ -450,20 +450,25 @@ struct bigint {
 //main
 
 
-bigint u;
+long long  n;
 void input()
 {
-	cin>>u;
+	cin>>n;
 }
 void lds_go_goooo()
 {
-	bigint a=u/11,cnt=0;
-	while(a%u!=0||a<u)
+	ll x=0;
+	ll cnt=0;
+	while(1)
 	{
-		a=a*10+1;
-		cnt+=1;
+		x=x*10+1;
+		x%=n;
+		if(x==0)
+			break;
+		cnt++;
 	}
 	cout<<cnt+1;
+	
 }
 
 int main()

@@ -70,9 +70,9 @@ void lds_go_goooo()
 			ans+=(j-pre)*(n-i);
 			pre=j;
 			mset(ck,0);
-						j++;
+			
 			i=j;
-
+			j++;
 		}
 	}
 	cout<<ans;

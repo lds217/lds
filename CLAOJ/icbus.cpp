@@ -94,6 +94,9 @@ void lds_go_goooo()
 		}
 		priority_queue <lds, vector <lds>, cmp1> q;
 		q.push({d[u],u,1});
+		bool vs[maxn];
+		mset(vs,0);
+		vs[u]=1;
 		while(!q.empty())
 		{
 			auto [dx,x,timer]= q.top();q.pop();
@@ -101,12 +104,10 @@ void lds_go_goooo()
 			for(auto y: adj[x])
 			{
 				if(minimize(d[y],d[u]+c[u]))
-				{	
-					
 					pq.push({d[y],y});
-					
-				}
-				if(timer<cnt[u])q.push({d[y],y,timer+1});
+				if(timer<cnt[u]&&vs[y]==0)q.push({d[y],y,timer+1});
+				vs[y]=1;
+				
 				
 			}
 		}

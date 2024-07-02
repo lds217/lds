@@ -70,7 +70,7 @@ void lds_go_goooo()
 			while(a[i]+mid>=a[j])
 			{
 				j++;
-				if(j>n)
+				if(j>n+1)
 					break;
 			}
 			i=j-1;

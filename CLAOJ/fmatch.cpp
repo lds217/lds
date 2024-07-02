@@ -42,7 +42,6 @@ ll POW(ll a, ll b)
 }
 
 //main
-// chep code :vvv
 long long x[500005],y[500005];
 long long d[500005];
 vector <long long> k[500005];
@@ -50,12 +49,7 @@ int m,n,p;
 
 void input()
 {
-	cin>>m>>n;
-	int a[100000],b[100000];
-	FOR(i,1,m)
-		cin>>a[i];
-	FOR(i,1,m)
-		cin>>a[i];
+	cin>>m>>n>>p;
 	FOR(i,1,p)
 	{
 		int u,v;
@@ -114,6 +108,16 @@ void lds_go_goooo()
 			if(x[i]==0)
 				if(dfs(i))
 					cnt++;
+		/*cout<<"x ";
+		FOR(i,0,m)	cout<<x[i]<<' ';
+		cout<<endl;
+		cout<<"y ";
+		FOR(i,0,n)	cout<<y[i]<<' ';
+		cout<<endl;
+		FOR(i,0,m)
+		cout<<d[i]<<' ';
+		
+		cout<<endl<<endl;*/
 	}
 	
 	cout<<cnt;

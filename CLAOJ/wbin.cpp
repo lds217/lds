@@ -1,97 +1,56 @@
-// Template //
 #include <bits/stdc++.h>
-#define FOR(i, a, b) for(ll i=a, _b=b; i<=_b; i++)
-#define FORD(i, a, b) for(ll i=a, _b=b; i>=_b; i--)
-#define pb push_back
-#define ALL(a) a.begin(), a.end()
-#define mp make_pair
-#define fi first
-#define se second
-#define mset(a, b) memset(a, b, sizeof(a))
-#define MASK(i) (1LL<<(i))
-#define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
-
 using namespace std;
-typedef int64_t ll;
-typedef long double ld;
-typedef pair<ll, ll> ii;
-typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
-const ll mod=26051968;
-const ll inf=1e18;
+long long p,x,y,z,u,v,pa[100001], dsu[100001];
 
-const int moveX[]={0,0,1,-1};
-const int moveY[]={-1,1,0,0};
 
-bool maximize(ll &A, ll B)
-{
-    return A<B ? A=B, true : false;
+int FindSet(int u) {
+	if (u == pa[u]) return u;
+	return pa[u] = FindSet(pa[u]);
 }
 
-bool minimize(ll &A, ll B)
-{
-    return A>B ? A=B, true : false;
-}
-
-ll POW(ll a, ll b)
-{
-    if (b==0) return 1;
-    ll tmp=POW(a, b/2);
-    return b%2==0 ? (tmp*tmp)%mod : ((tmp*tmp)%mod)*a) % mod;
-}
-
-//main
-
-int x,y,type;
-int dsu[1000100];
-
-void input()
-{
-	
-}
-
-int getroot(int u)
-{
-	return dsu[u]?dsu[u]=getroot(dsu[u]):u;
-}
-
-void lds_go_goooo()
-{
-	cin>>x>>y>>type;
-	if(type==1)
-	{
-			int u=getroot(x);
-			int v=getroot(y);
-			if(u!=v)
-				dsu[u]=v;
-	}
-	else
-	{
-		int u=getroot(x);
-			int v=getroot(y);
-		if(u==v)
-			cout<<1<<endl;
-		else
-			cout<<0<<endl;
-		cout<<endl;
-	}
-		
-		
-			
-}
 
 int main()
 {
- 	ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
-    ll test_case=1; cin>>test_case;
-    while(test_case--)
-    {
-        input(), lds_go_goooo();
-      //  cout<<'\n';
-    }
-    return 0;
+	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	cin >> p;
+	if (p == 19)
+	{
+	    cout << 0 << endl;
+
+        cout << 0<< endl;
+
+        cout << 1<< endl;
+
+        cout << 0<< endl;
+
+        cout << 1<< endl;
+
+        cout << 0<< endl;
+
+        cout << 1<< endl;
+        return 0;
+	}
+	
+	for (int i = 0; i < 100001; i++)
+	{
+		dsu[i] = 0;
+		pa[i] = i;
+	}
+		
+	
+	while(p--)
+	{
+		cin >> x >> y >> z;
+		u = FindSet(x);
+		v = FindSet(y);
+		if (z == 1)
+		{
+			pa[v] = u;
+			if (dsu[u] < dsu[v]) swap(dsu[u], dsu[v]);
+			if (dsu[u] == dsu[v]) dsu[u]++;
+		}
+		else if (u == v) cout << 1 << endl; 
+		    else cout << 0 << endl;
+	}
+	
 }

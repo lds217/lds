@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+#define task "gues"
 
 using namespace std;
 typedef int64_t ll;
@@ -68,8 +68,8 @@ int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
+    freopen(task".inp", "r", stdin);
+    freopen(task".out", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

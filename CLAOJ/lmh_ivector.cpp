@@ -68,7 +68,7 @@ int get(int x)
 
 void update(int x,int val)
 {
-	while(x<n)
+	while(x<=n)
 	{
 		bit[x]+=val;
 		x+=x&(-x);
@@ -94,13 +94,14 @@ void lds_go_goooo()
 //	update(6);
 	FOR(i,1,n)
 	{
-		ans[i]=get(n-x[i]);
+		ans[x[i]]=get(n-x[i]);
 		update(n-x[i]+1,1);
 	}
 	FOR(i,1,n)
 		cout<<ans[i]<<" ";
-	mset(bit,0);
+	
 	cout<<endl;
+	mset(bit,0);
 	FOR(i,1,n)	update(i,1);
 	FOR(i,1,n)
 	{

@@ -42,21 +42,14 @@ ll POW(ll a, ll b)
 }
 #define int ll
 struct area{
-	ll type,l,b,r,t;
+	int type,l,b,r,t;
 };
 //sun -1,rain 1
         // Main Function //
 area k[maxn];
-int h,w,n,d,dp[2005][2005];
-bool vs[2005][2005];
+int h,w,n,d,dp[6005][6005];
+bool vs[6005][6005];
 vector<int> X,Y;
-
-ll get(int i,int j)
-{
-	return 1LL*(Y[i+1]-Y[i])*(X[j+1]-X[j]);
-}
-
-
 void input()
 {
 	cin>>h>>w>>n>>d;
@@ -82,7 +75,6 @@ void input()
 
 ll bfs(int sx,int sy)
 {
-	ll ans=get(sx,sy);
 	queue<ii> q;
 	q.push({sx,sy});
 	vs[sx][sy]=1;
@@ -100,12 +92,11 @@ ll bfs(int sx,int sy)
 			if(vs[dx][dy]==0&&abs(dp[dx][dy])<=d)
 			{
 				q.push({dx,dy});
-				ans+=get(dx,dy);
 				vs[dx][dy]=1;
 			}
 		}
 	}
-	return ans;
+	return 1;
 }
 
 int getX(int x)
@@ -120,6 +111,10 @@ int getY(int x)
 	return pos;
 }
 
+ll get(int i,int j)
+{
+	return (Y[i+1]-Y[i])*(X[j+1]-X[j]);
+}
 
 void solve()
 {
@@ -144,8 +139,8 @@ void solve()
 			dp[b][r]-=type;
 		}
 	
-	FOR(i,0,X.size()-1)
-		FOR(j,0,Y.size()-1)
+	FOR(i,0,Y.size())
+		FOR(j,0,X.size())
 		{
 			if(i>0)	dp[i][j]+=dp[i-1][j];
 			if(j>0)	dp[i][j]+=dp[i][j-1];
@@ -165,16 +160,17 @@ void solve()
 	}
 	cout<<get(2,2)<<endl;*/
 	ll cnt=0,fn=0;
-/*	FOR(i,0,Y.size()-2)
+	FOR(i,0,Y.size()-2)
 		FOR(j,0,X.size()-2)
 		{
-			if(abs(dp[i][j])<=d&&vs[i][j]==0)
+			if(abs(dp[i][j])<=d)
 			{
-				fn++;
-				cnt+=bfs(i,j);
+				cnt+=get(i,j);
+				if(vs[i][j]==0)
+					fn+=bfs(i,j);
 			}
 		}
-	cout<<cnt<<' '<<fn;*/
+	cout<<cnt<<' '<<fn;
 }
 
 signed main()

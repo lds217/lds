@@ -1,5 +1,44 @@
 // Template //
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <bitset>
+#include <complex>
+#include <deque>
+#include <exception>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <ios>
+#include <iosfwd>
+#include <iostream>
+#include <istream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <locale>
+#include <map>
+#include <memory>
+#include <new>
+#include <numeric>
+#include <ostream>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <sstream>
+#include <stack>
+#include <stdexcept>
+#include <streambuf>
+#include <string>
+#include <typeinfo>
+#include <utility>
+#include <valarray>
+#include <vector>
+#include <cstring>
+#include <unordered_map>
+#include <cmath>
+#include <array>
+#include <cassert>
+#include <random>
+
 #define FOR(i, a, b) for(ll i=a, _b=b; i<=_b; i++)
 #define FORD(i, a, b) for(ll i=a, _b=b; i>=_b; i--)
 #define pb push_back
@@ -17,7 +56,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
+const ll maxn=3*1e5+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -43,15 +82,36 @@ ll POW(ll a, ll b)
 
 //main
 
-
-
+double get(double n,double m)
+{
+    if(n>=0&&m>=0)
+            return atan(m*1.0/n*1.0);
+        else
+            if(n<=0&&m>=0)
+                return M_PI-atan(abs(m)*1.0/abs(n)*1.0);
+            else    
+                if(n<=0&&m<=0)
+                    return atan(abs(m)*1.0/abs(n)*1.0)+M_PI;
+                else
+                    return 2*M_PI-atan(abs(m)*1.0/abs(n)*1.0);
+}
+int n;
+int a[maxn];
 void input()
 {
-
+   cin>>n;
+   FOR(i,1,n) cin>>a[i];
+   cout<<a[1]<<' ';
+   FOR(i,2,n)
+    cout<<a[i]*a[i-1]/gcd(a[i],a[i-1])<<' '; 
+    cout<<a[n]<<' ';
 }
+
+
+
 void lds_go_goooo()
 {
-
+    
 }
 
 int main()
@@ -60,7 +120,7 @@ int main()
     cin.tie(0);
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    ll test_case=1; //cin>>test_case;
+    ll test_case=1; cin>>test_case;
     while(test_case--)
     {
         input(), lds_go_goooo();

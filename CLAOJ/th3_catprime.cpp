@@ -56,12 +56,9 @@ bool upperPrime(string str){
 	else if (x%3==0 && x>3)
 		return 0;
 	else{
-		long long k = (sqrt(x)+1)/6;
-		for (int i=1;i<=k;i++)
-			if ((x%(6*i+1) == 0) && (6*i+1 < x))
-				return 0;
-			else if((x%(6*i-1) == 0) && (6*i-1 < x))
-				return 0;
+		for(int i=5;i*i<=x;i++)
+		    if(x%i==0)
+		        return 0;
 	}
 	return 1;
 }
@@ -87,20 +84,18 @@ void lds_go_goooo()
 			continue;
 		}
 		string str=to_string(a);
-		string tmp1=str,tmp2;
-		tmp1.pop_back();
 		long long sz=str.size();
-		while(tmp1.size()>=d)
+		FOR(i,d,sz-1)
 		{
-			tmp1.pop_back();
-			tmp2=tmp2+str[tmp1.size()];
-			cout<<tmp1<<' '<<tmp2<<endl;
+			string tmp1=str.substr(0,sz-i);
+			string tmp2=str.substr(sz-i,i);
+		//	cout<<tmp1<<' '<<tmp2<<endl;
 			if(tmp1.size()>=d&&tmp2.size()>=d)
 				if(upperPrime(tmp1)&&upperPrime(tmp2)&&tmp2[0]!='0')
-				{
-					cout<<str;
-					return;
-				}
+			{
+				cout<<str;
+				return;
+			}
 		}
 		a++;
 	}
@@ -112,9 +107,9 @@ int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-  //  freopen(task".INP", "r", stdin);
+    freopen(task".INP", "r", stdin);
  
- //   freopen(task".OUT", "w", stdout);
+    freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

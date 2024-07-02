@@ -1,4 +1,5 @@
 // Template //
+#pragma GCC optimize ("O3")
 #include <bits/stdc++.h>
 #define FOR(i, a, b) for(ll i=a, _b=b; i<=_b; i++)
 #define FORD(i, a, b) for(ll i=a, _b=b; i>=_b; i--)

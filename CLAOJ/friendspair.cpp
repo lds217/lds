@@ -66,7 +66,7 @@ void lds_go_goooo()
 			tmp/=10;
 		}
 		a[num]++;
-		cout<<num<<' ';
+//		cout<<num<<' ';
 		num=0;
 	}
 	int ans=0;

@@ -68,7 +68,7 @@ void lds_go_goooo()
 {
 	sort(a+1,a+1+n);
 	long long ans=0;
-	long long l=1,r=1e9;
+	long long l=1,r=2e9;
 	while(r>=l)
 	{
 		long long mid=(l+r)/2;

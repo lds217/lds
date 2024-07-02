@@ -45,7 +45,7 @@ ll POW(ll a, ll b)
 
 
 long long L,R;
-bool eratos[50000000];
+ll cnt=0;
 
 void input()
 {
@@ -54,23 +54,27 @@ void input()
 
 void prepare()
 {
+    vector<bool> isPrime(R - L + 1, true); 
 	for (long long i = 2; i * i <= R; ++i) {
     	for (long long j = max(i * i, (L + i - 1) / i * i); j <= R; j += i) {
-       		eratos[j - L] = 1;
+       		isPrime[j - L] = false;
     	}
 	}
-	if(L<=1)
-		eratos[1-L]=0;
+	if (1 >= L) {  
+    isPrime[1 - L] = false;
+    }
+	for (long long x = L; x <= R; ++x) {
+    if (isPrime[x - L]) {
+        cnt++;
+    }
+}
 	
 }
 
 void lds_go_goooo()
 {
 	prepare();
-	ll cnt=0;
-	FOR(i,L,R)
-		if(eratos[i-L]==0)
-			cnt++;
+	
 	cout<<cnt;
 }
 

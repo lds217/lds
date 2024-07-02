@@ -81,7 +81,7 @@ void lds_go_goooo()
 		cout<<suffmax[i]<<' ';
 	cout<<endl;*/
 	FOR(i,1,n)
-		maximize(ans,a[i]*(suffmax[i]-premax[i]+1));
+		maximize(ans,1LL*a[i]*(suffmax[i]-premax[i]+1));
 		cout<<ans;
 }
 int main()

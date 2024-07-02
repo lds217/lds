@@ -17,7 +17,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=3*1e6+10;
+const ll maxn=3*1e7+10;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -72,23 +72,23 @@ void lds_go_goooo()
 		cin>>a[i].fi>>a[i].se;
 		a[i].fi+=2e6+1;
 		ll t=d*d-a[i].se*a[i].se;
-		if(t<0)
+		if(t<0||a[i].se>d)
 		{
 			cout<<-1;
 			return;
 		}
-		ll tmp=sqrt(d*d-a[i].se*a[i].se);
-		dp[a[i].fi-tmp]++;
-		dp[a[i].fi+tmp+1]--;
+		double tmp=sqrt(d*d-a[i].se*a[i].se);
+	//	dp[a[i].fi-tmp]++;
+	//	dp[a[i].fi+tmp+1]--;
 		b.pb({a[i].fi-tmp,a[i].fi+tmp});
 		
 	}
 	ll res=0;
-	ll left=0;
+	double left=0;
 	sort(ALL(b));
 	for(auto [u,v]: b)
 	{
-		cout<<u<<' '<<v<<endl;
+//		cout<<u<<' '<<v<<endl;
 		if(left<u)	left=v,res++;
 		else
 			if(left>v)

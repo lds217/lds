@@ -61,7 +61,7 @@ bool check(int x)
 	FOR(i,2,n)
 	{
 	    if(sum>=0)
-		    sum=max(0LL,sum-(a[i].fi-a[i-1].fi));
+		    sum=max(0LL,sum-(a[i].fi-a[i-1].fi)*1LL);
 	    else
 	        sum-=(a[i].fi-a[i-1].fi);
 		sum+=a[i].se-x;

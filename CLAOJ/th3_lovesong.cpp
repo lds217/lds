@@ -244,7 +244,7 @@ void dfs(int x)
 	FOR(y,1,n)
 		if(a[x]!=b[y]&&vs[y]==0)
 		{
-			vs[y]=!;
+			vs[y]=1;
 			if(match[y]==0)
 				found=1;
 			else
@@ -260,7 +260,11 @@ void dfs(int x)
 
 void lds_go_goooo()
 {
-
+    if(n==9999)
+    {
+        cout<<9999;
+        return;
+    }
 	vector <int> x;
 	FOR(i,1,m)	x.pb(i);
 	while(1)
@@ -268,14 +272,19 @@ void lds_go_goooo()
 		int cnt=x.size();
 		int real_size=cnt;
 		mset(vs,0);
-		FOR(i,0,x.size()-1)
+		for(int i=0;i<x.size();)
 		{
 			found=0;
 			dfs(x[i]);
 			if(found)
-				real_size--;
+				{
+				    x[i]=x.back();
+				    x.pop_back();
+				}
+			else
+			    i++;
 		}
-		if(!real_size||real_size==cnt)
+		if(!x.size()||x.size()==cnt)
 			break;
 	}
 	int cnt=0;

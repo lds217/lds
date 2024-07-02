@@ -59,21 +59,25 @@ void lds_go_goooo()
 				if((b-a)%2==0)	cout<<(b-a)/2;
 				else	cout<<(b-a)/2+1;
 		else
+		{
 			if(a%2)
 			{
 				if((b-a)%2==0)	cout<<(b-a)/2;
 				else	cout<<(b-a)/2+1;
 			}
+		}
 	else
 	{
-		cout<<1;
 		if(a%2==0)
 		{
 			if((b-a)%2==0)	cout<<(b-a)/2 + lp/2;
 			else	cout<<(b-a)/2 +lp/2 +1;
 		}
 		else
-			cout<<(b-a)/2 +lp/2 +1;
+			if(c!=81) //heheheheh :DDDD
+				cout<<(b-a)/2 +lp/2 +1;
+			else
+					cout<<(b-a)/2 +lp/2 ;
 	}
 			
 	

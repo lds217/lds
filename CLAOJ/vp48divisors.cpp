@@ -54,9 +54,7 @@ void sieve()
 					prime[j]=i;
 					
 	FOR(i,2,10000)	if(!prime[i])	prime[i]=i;
-
 	FOR(i,2,10000)	if(prime[i]==i) compress_prime[i]=++cnt;
-//	cout<<prime[5]<<endl;
 }
 
 void build()
@@ -68,9 +66,9 @@ void build()
 
 
 
-vector <short> pre(int x)
+vector <int> pre(int x)
 {
-	vector <short> a(1231);
+	vector <int> a(1231);
 	while(x>1)
 	{
 		a[compress_prime[prime[x]]]++;
@@ -81,7 +79,7 @@ vector <short> pre(int x)
 
 void update(int pos,int val)
 {
-	vector <short> a=pre(val);
+	vector <int> a=pre(val);
 	pos+=n;
 	FOR(i,1,1229)	tree[pos][i]=a[i];
 	for(;pos>0;pos>>=1)
@@ -89,9 +87,9 @@ void update(int pos,int val)
 			tree[pos>>1][i]=tree[pos][i]+tree[pos^1][i];
 }
 
-vector <short> get(int l,int r)
+vector <int> get(int l,int r)
 {
-	vector <short> res(1231);
+	vector <int> res(1231);
 	for(l+=n,r+=n;l<r;l>>=1,r>>=1)
 	{
 		if(l&1)
@@ -116,7 +114,7 @@ void input()
 	{
 		int tmp;
 		cin>>tmp;
-		vector <short> res=pre(tmp);
+		vector <int> res=pre(tmp);
 		FOR(j,1,1229)
 			tree[i][j]=res[j];
 	}
@@ -136,15 +134,15 @@ void lds_go_goooo()
 		cin>>type;
 		if(type==0)
 		{
-			short pos,val;
+			int pos,val;
 			cin>>pos>>val;
 			update(pos-1,val);
 		}
 		else
 		{
-			short l,r;
+			int l,r;
 			cin>>l>>r;l--;
-			vector <short> ans=get(l,r);
+			vector <int> ans=get(l,r);
 			long long fil=1;
 			FOR(i,1,1229)
 				if(ans[i])	(fil*=(ans[i]+1))%=(1000000007);

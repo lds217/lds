@@ -92,12 +92,13 @@ void bfs(ll st)
 	}
 }
 
-void dfs(ll u,ll prev=0)
+bool vs[maxn];
+void dfs(ll u)
 {
 	dp[u]+=c[u];
 	for(ii v: k[u])
-		if(v.se!=prev&&par[v.se]==u)
-			dfs(v.se,u),dp[u]+=dp[v.se];
+		if(vs[v.se]==0&&par[v.se]==u)
+			vs[v.se]=1,dfs(v.se),dp[u]+=dp[v.se];
 
 
 }

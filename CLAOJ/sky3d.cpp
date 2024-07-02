@@ -1,114 +1,124 @@
-// Template //
+// Created by lds
 #include <bits/stdc++.h>
-#define FOR(i, a, b) for(ll i=a, _b=b; i<=_b; i++)
-#define FORD(i, a, b) for(ll i=a, _b=b; i>=_b; i--)
-#define pb push_back
-#define ALL(a) a.begin(), a.end()
+using namespace std;
 #define mp make_pair
+#define pb push_back
 #define fi first
 #define se second
-#pragma GCC optimize ("O3")
-#define mset(a, b) memset(a, b, sizeof(a))
-#define MASK(i) (1LL<<(i))
-#define BIT(x, i) (((x)>>(i))&1)
-#define task "sky"
+#define FOR(i, a, b) for(int i = (a), _b = (b); i <= _b; ++i) 
+#define FORD(i, a, b) for(int i = (a), _b = (b); i >= _b; --i)
+#define ALL(a) (a).begin(), (a).end()
+#define RALL(a) (a).rbegin(), (a).rend()
+#define MASK(i) (1ll<<(i))
+#define BIT(t, i) (((t)>>(i))&1)
+typedef long long ll;
+typedef vector<int> vi;
+typedef vector<ll> vll;
+typedef pair<ll, ll> pll;
+typedef pair<int, int> ii;
 
-using namespace std;
-typedef int64_t ll;
-typedef long double ld;
-typedef pair<ll, ll> ii;
-typedef pair<ll, ii> iii;
-const ll maxn=2*1e5+2;
-const ll mod=26051968;
-const ll inf=1e18;
-
-const int moveX[]={0,0,1,-1};
-const int moveY[]={-1,1,0,0};
-
-
-bool minimize(ll &A, ll B)
-{
-    return A<B ? A=B, true : false;
+/***Common Functions***/
+template <class T>
+bool minimize(T &a, T b) {
+	if (a > b) {
+		a = b;
+		return true;
+	}
+	return false;
 }
 
-ll POW(ll a, ll b)
-{
-    if (b==0) return 1;
-    ll tmp=POW(a, b/2);
-    return b%2==0 ? (tmp*tmp)%mod : (tmp*tmp*a) % mod;
+template <class T>
+bool maximize(T &a, T b) {
+	if (a < b) {
+		a = b;
+		return true;
+	}
+	return false;
 }
 
-//main
+template<class T>
+void read(T &a) {
+	a = 0;
+	char c; 
+	while (!isdigit(c = getchar())) {}
+	do {
+		a = a*10 + (c-'0');
+	} while (isdigit(c = getchar()));
+}
 
-vector <ll> k[maxn];
-ll st,ed,n,m;
-void input()
-{
-	cin>>n>>m;
-	FOR(i,0,m-1)
-	{
-		ll b,p;
-		cin>>b>>p;
-		k[b].pb(p);
-		if(i==0)
-			st=b;
-		if(i==1)
-			ed=b;
+template<class T> 
+void write(T a){
+	if (a > 9) write(a/10);
+	putchar(a%10 + '0');
+}
+
+/***End of Template***/
+const int MAX = 5e4+5;
+const int N = 5e4+5;
+const int S = 5;
+int start[MAX], step[MAX];
+vi doge[N];
+int numDoge, numSky;
+int dist[N<<S];
+vector<ii> adj[N];
+const int INF = 1e9;
+
+void Input() {
+	cin >> numSky >> numDoge;
+	FOR(i, 0, numDoge-1) {
+		cin >> start[i] >> step[i];
+		doge[start[i]].pb(i);
 	}
 }
 
-ll d[maxn];
-void lds_go_goooo()
-{
-	mset(d,0x3f3f3f3f);
-	d[st]=0;
-queue<ii > pq;
-	pq.emplace(0,st);
-	while(!pq.empty())
-	{
-		ll du=pq.front().fi,u=pq.front().se; pq.pop();
-		if(du!=d[u]) continue;
-		if(u==ed)
-		{
-			cout<<d[u];
+#define key(node, step) (((node)<<(S))|(step))
+
+void Solve() {
+	memset(dist, 0x3f, sizeof dist);
+	dist[key(start[0], 0)] = 0;
+	priority_queue<ii, vector<ii>, greater<ii>> pq;
+	pq.push(mp(0, key(start[0], 0)));
+	while (pq.size()) {
+		auto [curDist, state] = pq.top(); pq.pop();
+		int pos = state>>S, curStep = state&(MASK(S)-1);
+		// cout << curDist << ' ' << pos << ' ' << curStep << '\n';
+		if (dist[state] != curDist) continue;
+		if (pos == start[1]) {
+			cout << curDist;
 			return;
 		}
-		for(ll dis:k[u])
-		{
-			for(ll i=1;u+dis*i<n;i++)
-				if(d[u]+i<d[u+dis*i])
-				{
-					d[u+dis*i]=d[u]+i;
-					pq.emplace(d[u]+i,u+dis*i);
+		if (curStep == 0) { // change doge
+			for(int d : doge[pos]) {
+				if (step[d] < MASK(S)) {
+					if (minimize(dist[key(pos, step[d])], curDist)) pq.push(mp(curDist, key(pos, step[d])));
+				} else {
+					for(int x = start[d] + step[d], cnt = 1; x < numSky; x += step[d], cnt++) {
+						if (minimize(dist[key(x, 0)], curDist + cnt)) pq.push(mp(curDist+cnt, key(x, 0)));
+					}
+					for(int x = start[d] - step[d], cnt = 1; x >= 0; x -= step[d], cnt++) {
+						if (minimize(dist[key(x, 0)], curDist + cnt)) pq.push(mp(curDist+cnt, key(x, 0)));
+					}
 				}
-			for(ll i=1;u-dis*i>=0;i++)
-				if(d[u]+i<d[u-dis*i])
-				{
-					d[u-dis*i]=d[u]+i;
-					pq.emplace(d[u-dis*i],u-dis*i);
-				}
+			}
+		} else {
+			if (pos-curStep >= 0 && minimize(dist[key(pos-curStep, curStep)], curDist+1)) 
+				pq.push(mp(curDist+1, key(pos-curStep, curStep)));
+			if (pos+curStep < numSky && minimize(dist[key(pos+curStep, curStep)], curDist+1))
+				pq.push(mp(curDist+1, key(pos+curStep, curStep)));
+			if (minimize(dist[key(pos, 0)], curDist)) pq.push(mp(curDist, key(pos, 0)));
 		}
 	}
-	cout<<-1;
-	/*
-	5 3
-	0 2
-	1 1
-	4 1
-	*/
-}
 
-int main()
-{
- 	ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    freopen(task".INP", "r", stdin);
-    freopen(task".OUT", "w", stdout);
-    ll test_case=1; //cin>>test_case;
-    while(test_case--)
-    {
-        input(), lds_go_goooo();
-        cout<<'\n';
-    }
-    return 0;
+	cout << -1;
+}	
+
+int main() {
+	ios::sync_with_stdio(0); cin.tie(0);
+	#ifdef ONLINE_JUDGE
+		freopen("sky.inp", "r", stdin);
+		freopen("sky.out", "w", stdout);
+	#endif
+	// if (fopen("inputf.in", "r")) freopen("inputf.in", "r", stdin);
+	Input(), Solve();
+	return 0;
 }

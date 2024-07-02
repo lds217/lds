@@ -47,6 +47,7 @@ ll POW(ll a, ll b)
 int n,m,h[200005],LCA[200005][LOG+2];
 vector <int> k[200005],day[200005];
 
+
 void input()
 {
 	cin>>n>>m;
@@ -64,6 +65,9 @@ void input()
 
 }
 
+
+
+
 void dfs(int u, int lvl, int par)
 {
 	h[u]=lvl;
@@ -76,9 +80,7 @@ void dfs(int u, int lvl, int par)
 void init()
 {
 
-	dfs(1,0,-1);
-	FOR(i,1,n)
-		h[i]++;
+	dfs(1,1,-1);
 	for(int i=1;i<=LOG;i++)
 		for(int j=1;j<=n;j++)
 			if(LCA[j][i-1]!=-1)
@@ -109,15 +111,14 @@ int getLCA(int a, int b)
 	return LCA[a][0];
 }
 
+
+
 void lds_go_goooo()
 {
 //	bfs(1);
-
 	mset(LCA,-1);
 	init();
-//	cout<<h[1];
-	cout<<"get lca 4 5"<<getLCA(4,2)<<endl;cout<<h[4]<<endl;
-	FOR(i,2,m)
+	FOR(i,1,m)
 	{
 		int deepest=day[i][0];
 		for(int &j:day[i])	
@@ -127,12 +128,8 @@ void lds_go_goooo()
 		int ans=0;
 		for(int &j:day[i])	
 		{
-			if (deepest != j)
-			{
-				int p=getLCA(deepest,j);
-			
-				ans=max(ans,h[j]+h[deepest]-2*h[p]);
-			}
+			int p=getLCA(deepest,j);
+			ans=max(ans,h[j]+h[deepest]-2*h[p]);
 		}
 		cout<<ans<<endl;
 	}

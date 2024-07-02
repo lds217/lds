@@ -17,7 +17,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=300;
+const ll maxn=255;
 const ll mod=26051968;
 const ll inf=1e18;
 

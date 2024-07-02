@@ -42,7 +42,7 @@ ll POW(ll a, ll b)
 }
 
 //main
-
+bool yes=0;
 int n,m,sx,sy;
 char a[252][252];
 long long val[252][252];
@@ -85,9 +85,10 @@ void bfs(int xt,int yt)
 				q.push({u,v});
 				if(u==1||v==1||u==n||v==m)
 				{
+				    yes=1;
 					cout<<val[u][v]<<endl;
 					cout<<u<<' '<<v<<endl;
-					long long i,j;
+					long long i=0,j=0;
 					while(a[i][j]!='E')
 					{
 					 	i=trace[{u,v}].fi;
@@ -107,6 +108,8 @@ void bfs(int xt,int yt)
 void lds_go_goooo()
 {
 	bfs(sx,sy);
+	if(yes==0)
+	    cout<<-1;
 }
 
 int main()

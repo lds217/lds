@@ -44,22 +44,16 @@ ll POW(ll a, ll b)
 //main
 
 int minprime[10000005];
-vector <int> prime;
 long long n;
 void prepare()
 {
 	mset(minprime,0);
-
-	for(int i=2;i*i<=1*1e7;i++)
+	for(int i=2;i*i<=1e7;i++)
 		if(minprime[i]==0)
-			for(int j=i*i;j<=1*1e7;j+=i)
+			for(int j=i*i;j<=1e7;j+=i)
 				if(minprime[j]==0)
 					minprime[j]=i;
-		
-    for(int i=2;i<=1*1e7;i++)
-        if(minprime[i]==0)
-            prime.pb(i);
-	for(int i=2;i<=1*1e7;i++)
+	for(int i=2;i<=1e7;i++)
 			if(minprime[i]==0)
 				minprime[i]=i;
 }
@@ -86,38 +80,17 @@ void lds_go_goooo()
 	}
 	else
 	{
-		long long m=n;
-		long long j;
-		for(long long i:prime)
+		for(long long i=2;i*i<=n;i++)
 		{
-			if(i*i>m)
-				break;
 			if(n%i==0)
-				cnt++;
-			while(n%i==0)
-				n/=i;
-		}
-
-		for(long long i=prime.back();i*i<=m&&i%6!=0;i++)
-		{
-			j=i;
-			if(n%i==0)
-				cnt++;
-			while(n%i==0)
 			{
-			
-				n/=i;
+				cnt++;
+    			while(n%i==0)
+    				n/=i;
 			}
 		}
-		for(long long i=j;i*i<=m;i+=6)
-		{
-			if(n%(i-1)==0||n%(i+1))
-				cnt++;
-			while(n%(i-1)==0||n%(i+1)==0)
-			{
-				n/=i;
-			}
-		}
+		if(n!=1)
+		    cnt++;
 	}
 	cout<<cnt;
 }
@@ -126,9 +99,9 @@ int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
+    prepare();
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    prepare();
     ll test_case=1; cin>>test_case;
     while(test_case--)
     {

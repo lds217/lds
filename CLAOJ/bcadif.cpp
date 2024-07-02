@@ -24,12 +24,12 @@ const ll inf=1e18;
 const int moveX[]={0,0,1,-1};
 const int moveY[]={-1,1,0,0};
 
-bool maximize(ll &A, ll B)
+bool maximize(int &A, int B)
 {
     return A<B ? A=B, true : false;
 }
 
-bool minimize(ll &A, ll B)
+bool minimize(int &A, int B)
 {
     return A>B ? A=B, true : false;
 }
@@ -44,10 +44,10 @@ ll POW(ll a, ll b)
 //main
 
 ll n,q,m;
-bool occ[100][500];
-bool avoid[100][500];
-ll cur=-1e9;
-ll ans=1e9;
+bool occ[100][50];
+bool avoid[100][50];
+int cur=-1e9;
+int ans=1e9;
 vector <int> T[100];
 
 bool check(int teacher,int course)

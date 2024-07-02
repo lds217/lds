@@ -43,7 +43,7 @@ ll POW(ll a, ll b)
 
 //main
 
-long long a[maxn],pre[maxn],n,ans=1e9;
+long long a[maxn],pre[maxn],n,ans=1e15;
 
 void input()
 {
@@ -62,10 +62,11 @@ long long get(int l,int r)
 int lp(int l, int r)
 {
 	long long tmp=-1;
+	long long u=l,v=r;
 	while(l<=r)
 	{
 		int mid=(l+r)/2;
-		if(abs(get(l,mid)-get(mid+1,r))>=abs(get(l,mid+1)-get(mid+2,r)))
+		if(abs(get(u,mid)-get(mid+1,v))>=abs(get(u,mid+1)-get(mid+2,v)))
 			l=mid+1;
 		else
 			{
@@ -88,7 +89,7 @@ long long getmin(int i,int l, int r)
 
 long long solve(int i)
 {
-	if(i<=1||i>=n-1) return 1e9;
+	if(i<=1||i>=n-1) return 1e15;
 	int left=lp(1,i);
 	int right=lp(i+1,n);
 	return getmax(i,left,right)-getmin(i,left,right);

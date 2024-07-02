@@ -49,15 +49,13 @@ bool vis0[maxn];
 bool vis1[maxn];
 int n,m;
 int x,y;
-queue<ii> q[2];
+queue <ii> q;
 void input()
 {
 	cin>>n>>m;
 	cin>>x>>y;
-	q[0].push({0,x});
-	q[1].push({0,y});
-	vis0[x]=1;
-	vis1[y]=1;
+	q.push({0,x});
+	q.push({1 ,y}); 
 	FOR(i,1,m)
 	{
 		int u,v;
@@ -68,45 +66,30 @@ void input()
 
 int bfs()
 {
-	int c=0;
-	while(!q[c].empty())
+	
+	while(!q.empty())
 	{
 		
-		auto [du,u]=q[c].front();q[c].pop();
-	//	if(du!=val[c][u])	continue;
- 		if(c==0)	mset(vis0,0);
- 		else	mset(vis1,0);
-		for(auto v: adj[u])
-		{
-			val[c][v]=du+1,q[c].push({val[c][v],v});
 
-			if(c==0)
-			{
-				if(vis1[v])
-					return val[c][v];
-				vis0[v]=1;
-			}
-			else
-			{
-				if(vis0[v])
-					return val[c][v];
-				vis1[v]=1;
-			}
-		}
+		 auto [c,u]=q.front();
+		/*if(du!=timer[c]) {
+			/timer[c]++; c=(c==0?1:0); continue;
+		}*/	
+		if(val[c][u]==val[(c==0?1:0)][u]&&val[c][u])
+	    return val[c][u]; 
 		
-		c=(c==0?1:0);
+		q.pop();
+		//if(du!=val[c][u])	cont
+		for(auto v: adj[u])
+			val[c][v]=val[c][u]+1,q.push({c,v});
+		  
 	}
 }
 
 void lds_go_goooo()
 {
-	cout<<bfs()-1;
-	FOR(i,0,1)
-	{
-		FOR(j,1,n)
-			cout<<val[i][j]<<' ';
-		cout<<endl;
-	}
+	cout<<bfs();
+	
 }
 
 int main()

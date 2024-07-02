@@ -49,7 +49,7 @@ void pre()
 		if(!prime[i])
 			for(int j=i;j<=maxn;j+=i)
 				prime[j]=i;
-	FOR(i,1,100000)
+	FOR(i,1,2000001)
 		if(!prime[i]) prime[i]=i;
 }
 ll n;

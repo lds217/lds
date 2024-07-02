@@ -71,10 +71,10 @@ long long Try(int i, long long w , long long val)
 }
 void lds_go_goooo()
 {
-	sort(a,a+n,[](lp l,lp p)
-	{
-		return ( long double)l.val/l.w> (long double)p.val/p.w;
-	});
+	//sort(a,a+n,[](lp l,lp p)
+	//{
+	//	return ( long double)l.val/l.w> (long double)p.val/p.w;
+	//});
 	cout<<Try(0,0,0);
 }
 

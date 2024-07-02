@@ -13,7 +13,7 @@
 #define task "SUADUONG"
 #define int long long
 using namespace std;
-typedef long long ll;
+typedef __int128_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
@@ -43,73 +43,63 @@ ll POW(ll a, ll b)
 
 //main
 
-ll gcd(ll a,ll b)
-{
-	if(a%b==0)return b;
-	return gcd(b,a%b);
-}
-
+long long n,l,r,a[30];
+vector<ii> ans;
 void input()
 {
+	
+}
 
+ll get(ll a,ll b)
+{
+	return (a*b)/__gcd(a,b);
 }
 
 
+void backtrack(ll pos,ll sum,ll cnt)
+{
+	if(pos>n)
+	{
+		if(cnt)	ans.pb({sum,cnt});
+		return;
+	}
+	backtrack(pos+1,sum,cnt);
+	if(get(a[pos],sum)<r)
+	backtrack(pos+1,get(a[pos],sum),cnt+1);
+}
 
 void lds_go_goooo()
 {
-	ll N,L,R;
-	while(cin>>N>>L>>R)
-//	cin>>N>>L>>R;
+	while(cin>>n)
 	{
-		ll a[21],ans1=0,ans2=0,lcm=0;
-		FOR(i,0,N-1)
+	    cin>>l>>r;
+		mset(a,0);
+		ans.clear();
+		FOR(i,1,n)
 			cin>>a[i];
-		for(ll mask=0;mask < (1<<N);mask++)
+		backtrack(1,1,0);
+		long long res=0;
+		for(ii x:ans)
 		{
-		    	int cnt=0;
-				bool first=1;
-			for(int j=N-1;j>=0;j--)
-			{
-			
-				if(((mask>>j)&1)==0)	continue;
-				cnt++;
-				if(first)
-				{
-					first=0;
-					lcm=a[j];
-				}
-				else
-					lcm=(lcm*a[j])/gcd(max(lcm,a[j]),min(lcm,a[j]));
-				
-			}
-			if(lcm==0)	continue;		
-			if(cnt%2)
-			{
-				ans1+=R/lcm;
-				ans2+=(L-1)/lcm;
-			}
-			else
-			{
-				ans1-=R/lcm;
-				ans2-=(L-1)/lcm;
-			}
-			
+			ll tmp=r/x.fi-(l-1)/x.fi;
+			if(x.se%2)	res+=tmp;
+			else	res-=tmp;
 		}
-		cout<<ans1-ans2<<endl;
+		cout<<res<<"\n";
 	}
 }
-signed  main()
+
+signed main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
     //freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
-    ll test_case=1; 
+    ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
         input(), lds_go_goooo();
-        //cout<<'\n';
+        cout<<'\n';
     }
     return 0;
 }

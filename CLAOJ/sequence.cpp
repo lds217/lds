@@ -43,8 +43,8 @@ ll POW(ll a, ll b)
 
 //main
 
-int n;
-int a[maxn];
+long long n;
+long long a[maxn];
 
 void input()
 {
@@ -54,18 +54,17 @@ void input()
 void lds_go_goooo()
 {
 	long long ans=0;
-	 priority_queue<int> q;
+	 priority_queue<long long > q;
 	 q.push(a[1]);
 	 FOR(i,2,n)
 	 {
-	 	if(q.top()>a[i])
+	 	if(q.top()>a[i]&&!q.empty())
 	 	{
 	 		ans+=abs(a[i]-q.top());
 	 		q.pop();
 	 		q.push(a[i]);
 		 }
-		 else
-		 	q.push(a[i]);
+		 q.push(a[i]);
 	 }
 	cout<<ans;
 }

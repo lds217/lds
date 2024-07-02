@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+#define task "cspb"
 
 using namespace std;
 typedef int64_t ll;
@@ -86,15 +86,15 @@ long long ma(string &a)
 void lds_go_goooo()
 {
 	l=to_string(stoll(l)-1);
-	cout<<ma(r)-ma(l)<<endl;
+	cout<<ma(r)-ma(l);
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
+    freopen(task".INP", "r", stdin);
+    freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

@@ -1,105 +1,58 @@
-// Template //
 #include <bits/stdc++.h>
-#define FOR(i, a, b) for(ll i=a, _b=b; i<=_b; i++)
-#define FORD(i, a, b) for(ll i=a, _b=b; i>=_b; i--)
-#define pb push_back
-#define ALL(a) a.begin(), a.end()
-#define mp make_pair
-#define fi first
-#define se second
-#define mset(a, b) memset(a, b, sizeof(a))
-#define MASK(i) (1LL<<(i))
-#define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
-
 using namespace std;
-typedef int64_t ll;
-typedef long double ld;
-typedef pair<ll, ll> ii;
-typedef pair<ll, ii> iii;
-const ll maxn=2*1e2+2;
-const ll mod=26051968;
-const ll inf=1e18;
 
-const int moveX[]={0,0,1,-1};
-const int moveY[]={-1,1,0,0};
-
-bool maximize(ll &A, ll B)
+struct xy
 {
-    return A<B ? A=B, true : false;
-}
+	long long a, b, c, d;	
+};
 
-bool minimize(ll &A, ll B)
-{
-    return A>B ? A=B, true : false;
-}
-
-ll POW(ll a, ll b)
-{
-    if (b==0) return 1;
-    ll tmp=POW(a, b/2);
-    return b%2==0 ? (tmp*tmp)%mod : (tmp*tmp*a) % mod;
-}
-
-//main
-
-struct lds{
-	int u,v,x,y;
-} a[maxn];
-
-int n;
-
+xy A[1001];
+long long n;
+bool visited[1001];
 void input()
 {
-	cin>>n;
-	FOR(i,1,n)
+	cin >> n;
+	for (int i = 1; i <= n; i++)
 	{
-		int u,v,x,y;
-		cin>>u>>v>>x>>y;
+		cin >> A[i].a >> A[i].b >> A[i].c >> A[i].d;
+	}
+	memset(visited,0,sizeof(visited));
+}
+
+long long res = 1;
+void collapse(long long a, long long b, long long c, long long d, long long i)
+{
+	for (int j = 1; j < i; j++)
+	{
+		long long x = A[j].c;
+		long long y = A[j].b;
 		
-		a[i]={u,v,x,y};
+		if (visited[j])
+		if (a <= x && b <= y && c >= x && d >= y)
+		{
+			visited[i] = true;
+			res++;
+			return;
+		}
 	}
-
 }
 
-bool check(lds a,lds b)
+void solve()
 {
-	//b overlap a
-	ii topright = {a.x,a.v};
-	return (topright.fi>=b.u&&topright.fi<=b.x&&topright.se<=b.v&&topright.se>=b.y);
-}
-
-void lds_go_goooo()
-{
-	bool blocked[maxn];
-	mset(blocked,0);
-	blocked[1]=1;
-	int cnt=0;
-	FOR(i,2,n)
+	visited[1] = true;
+	for (int i = 2; i <= n; i++)
 	{
-		FOR(j,1,i-1)
-			if(blocked[j])
-				if(check(a[i],a[j]))
-				{
-					blocked[j]=1;
-					cnt++;
-					break;
-				}
+		collapse(A[i].a, A[i].b, A[i].c, A[i].d, i);
 	}
-	cout<<cnt;
 }
 
 int main()
 {
- 	ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
-    ll test_case=1; //cin>>test_case;
-    while(test_case--)
-    {
-        input(), lds_go_goooo();
-        cout<<'\n';
-    }
-    return 0;
+	input();
+	solve();
+	cout << res << "\n";
+	for (int i = n; i >= 0; i--) if (visited[i]) cout << i << ' ';
+		
+	
+	return 0;
 }

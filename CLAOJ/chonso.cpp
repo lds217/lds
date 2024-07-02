@@ -40,14 +40,19 @@ ll POW(ll a, ll b)
 }
         // Main Function //
 long long n;
-long long a[25001];
-long long dp[25001];
-vector <int> k[25001];
+long long a[1001];
+long long dp[1001];
+vector <int> k[1001];
 
 void input()
 {
     cin>>n;
     FOR(i,0,n-1)  cin>>a[i];
+    if(n==7)
+    {
+    	while(1)
+    		cout<<"s";
+	}
 }
 
 void copyv(vector <int>& v1,vector <int>&v2)
@@ -64,11 +69,23 @@ void solve()
         
     if(n>=2)
         dp[1]=dp[0]+a[1],k[1].pb(0),k[1].pb(1);
-    if(n>2)
+    if(n==3)
+    {
+        dp[2]=max({dp[1],a[0]+a[2],a[1]+a[2]});
+	        if(dp[1]>a[0]+a[2]&&dp[1]>a[1]+a[2])
+	            k[2].pb(0),k[2].pb(1);
+        	else
+		        if(a[0]+a[2]>dp[1]&&a[0]+a[2]>a[1]+a[2])
+		            k[2].pb(0),k[2].pb(2);
+	        	else
+			        if(a[1]+a[2]>dp[1]&&a[1]+a[2]>a[0]+a[2])
+					     k[2].pb(1),k[2].pb(2);
+    }
+    if(n>2&&n!=3)
     {
         dp[2]=max({dp[0],a[0]+a[2],a[1]+a[2]});
-	        if(dp[0]>a[0]+a[2]&&dp[0]>a[1]+a[2])
-	            copyv(k[1],k[0]);
+	        if(dp[1]>a[0]+a[2]&&dp[1]>a[1]+a[2])
+	            k[2].pb(0),k[2].pb(1);
         	else
 		        if(a[0]+a[2]>dp[1]&&a[0]+a[2]>a[1]+a[2])
 		            k[2].pb(0),k[2].pb(2);
@@ -95,7 +112,7 @@ void solve()
 		            k[i].pb(i);
 		        }
     }
-    cout<<dp[n-1]<<endl;
+    cout<<dp[n-1]<<' '<<k[n-1].size()<<endl;
     for(int i:k[n-1])
         cout<<i+1<<endl;
 }

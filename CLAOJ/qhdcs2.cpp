@@ -63,11 +63,10 @@ lli lds_go_goooo(string a)
 
 int main()
 {
-    //freopen("tbpb3.inp","r",stdin);
-    //freopen("tbpb3.out","w",stdout);
+    freopen("tbpb3.inp","r",stdin);freopen("tbpb3.out","w",stdout);
     cin>>a;
     lli sus=lds_go_goooo(a);
-    hihi;
+    hihi
     cout<<sus;
     return 0;
 }

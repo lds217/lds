@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+#define task "tcircle"
 
 using namespace std;
 typedef int64_t ll;
@@ -59,7 +59,7 @@ void input()
 }
 void lds_go_goooo()
 {
-	if(n)
+	if(n%2)
 		cout<<nCk(n,3)-n*nCk((n-1)/2,2);
 	else
 		cout<<nCk(n,3)-n/2*nCk((n-1)/2,2)-n/2*nCk((n)/2,2);
@@ -69,7 +69,7 @@ int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen(task".INP", "r", stdin);
+   // freopen(task".INP", "r", stdin);
     //freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)

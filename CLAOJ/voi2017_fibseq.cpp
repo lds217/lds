@@ -61,7 +61,7 @@ struct Matrix{
 		return c;
 	}
 	
-	// this needs to be a fucking pointer
+	// this needs to be a pointer
 	Matrix POW(long long b)
 	{
 		//b==1
@@ -83,13 +83,22 @@ void input()
 void lds_go_goooo()
 {
 	Matrix base;
+
 	base.val[1][1]=base.val[1][2]=base.val[2][1]=1;
 	f[1]=base.POW(i-1).val[1][1]%k;
 	f[2]=base.POW(i).val[1][1]%k;
 
 	FOR(ind,3,n)
 		f[ind]=(f[ind-1]+f[ind-2])%k;
-
+/*	
+	cout<<"index :";
+	FOR(ind,i,i+n)
+		cout<<ind<<' ';
+	cout<<endl;
+	cout<<"value :";
+	FOR(ind,1,n)
+		cout<<f[ind]<<" ";
+	cout<<endl;*/
 	mset(pos,-1);
 	pos[0]=0;
 	long long cur=0;

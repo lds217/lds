@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+#define task "UAV"
 
 using namespace std;
 typedef int64_t ll;
@@ -57,13 +57,17 @@ ll dp[maxn];
 void lds_go_goooo()
 {
 	int u,v;
-	FOR(i,1,n)
-	{
-		int j=min(i+l,n);
-		while(a[j]%2==0)
-			j--;
+	int j=2,i=1;
+    while(j<=n)
+	{	
+		int next=j;
+		while(j-i<=l&&j<=n)
+		{
+		    if(a[j]%2)  next=j;
+			j++;
+		}
 		u++;
-		i=j;
+		i=next;
 	}
 	//cout<<u+1;
 	mset(dp,-0x3f);
@@ -87,8 +91,8 @@ int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
+    freopen(task".INP", "r", stdin);
+    freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

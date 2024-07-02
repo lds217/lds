@@ -4,7 +4,6 @@
 #define FORD(i, a, b) for(ll i=a, _b=b; i>=_b; i--)
 #define pb push_back
 #define ALL(a) a.begin(), a.end()
-#define mp make_pair
 #define fi first
 #define se second
 #define mset(a, b) memset(a, b, sizeof(a))
@@ -17,7 +16,7 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=2*1e4+2;
+const ll maxn=4*1e5+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -43,69 +42,75 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,m;
 
-vector <tuple<ll,ll,ll>> adj[maxn];
-ll d[maxn];
+
+ll n,m;
+
+vector <ll> k[maxn];
+
+
+struct edge{
+	ll w,u,v;
+}  a[maxn];
 
 void input()
 {
 	cin>>n>>m;
 	FOR(i,1,m)
 	{
-		int u,v,w;
+		ll u,v,w;
 		cin>>u>>v>>w;
-		adj[u].pb({w,v,i});
-		adj[v].pb({w,u,i});
+		k[u].pb(i);
+		k[v].pb(i);
+		a[i]={w,u,v};
 	}
+	
 }
 
-void bfs(int s)
+ll d[maxn];
+ll r[maxn];
+void bfs(ll s)
 {
-	mset(d,0x3f3f);
-	d[s]=0;
-	priority_queue<ii,vector<ii>, greater<ii>> q;
+	mset(d,0x3f);
+	queue<ii> q;
 	q.push({0,s});
+	
+	d[s]=0;
 	while(!q.empty())
 	{
-		auto [du,u]=q.top();
+		ll u=q.front().se;
+		ll du=q.front().fi;
 		q.pop();
-		if(du!=d[u])	continue;
-		for(auto [dv,v,i]:adj[u])
-			if(minimize(d[v],du+dv))
+		if(d[u]!=du)	continue;
+		for(ll i:k[u])
+		{
+			ll v;
+			if(u==a[i].u) v=a[i].v;
+			else	v=a[i].u;
+			if(d[v]>d[u]+a[i].w)
+			{
+				d[v]=d[u]+a[i].w;
 				q.push({d[v],v});
+				r[v]=i;
+			}
+			else
+				if(d[v]==d[u]+a[i].w&&a[r[v]].w>a[i].w)
+					r[v]=i;
+		}
 	}
 }
 
-bool ck[maxn],vis[maxn];
-void dfs(int u)
-{
-	if(u==1||vis[u])	return;
-	
-	ll curr=inf,nx=0,nx_id=0;
-	for(auto [dv,v,id]:adj[u])
-		if(d[u]-dv==d[v])
-			if(minimize(curr,dv))
-				nx=v,nx_id=id;
-	vis[u]=1;
-	ck[nx_id]=1;dfs(nx);
-}
 
 void lds_go_goooo()
 {
+
 	bfs(1);
-	FOR(i,1,n)	cout<<d[i]<<' ';
-	cout<<endl;
-	ii b[maxn];
-	FOR(i,2,n)	dfs(i);
-	FOR(i,1,n)
-		b[i]={d[i],i};
-//	sort(b+2,b+n+1);
-//	FOR(i,2,n)	dfs(b[i].se);
-	//dfs(3);
-	cout<<accumulate(ck,ck+m+1,0)<<endl;
-	FOR(i,1,m)	if(ck[i])	cout<<i<<" ";
+	cout<<n-1<<endl;
+	FOR(i,1,m)
+		if(r[i])
+			cout<<r[i]<<' ';
 		
+	
 }
 
 int main()

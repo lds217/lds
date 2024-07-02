@@ -77,11 +77,9 @@ void input()
 	cin>>sx>>sy;
 }
 
-ll ans=40000;
+ll ans;
 void dfs(ll u,ll val)
 {
-	if(locked[u])
-		return;
 	if(val>ans)
 		return;
 	if(u==sy)
@@ -92,7 +90,7 @@ void dfs(ll u,ll val)
 	for(int v:adj[u])
 		if(locked[v]==0)
 			dfs(v,val+1);
-	if(u>k)	return;
+	if(!affect[u].size())	return;
 	for(int v:affect[u])
 		locked[v]^=1;
 		
@@ -107,6 +105,7 @@ void dfs(ll u,ll val)
 
 void lds_go_goooo()
 {
+    ans=n*n;
 	dfs(sx,0);
 	cout<<ans;
 }

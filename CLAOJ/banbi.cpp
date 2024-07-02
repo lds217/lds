@@ -60,7 +60,7 @@ void lds_go_goooo()
 	char curr=a;
 	while((str[l]==curr||str[r]==curr) &&(l>=0&&r<str.size()))
 	{
-		cout<<l<<' '<<r<<endl;
+	//	cout<<l<<' '<<r<<endl;
 		if(str[l]==curr)
 			l--;
 		if(str[r]==curr)

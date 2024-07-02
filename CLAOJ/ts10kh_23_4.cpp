@@ -10,7 +10,7 @@
 #define mset(a, b) memset(a, b, sizeof(a))
 #define MASK(i) (1LL<<(i))
 #define BIT(x, i) (((x)>>(i))&1)
-#define task "SUADUONG"
+#define task "zfactor"
 
 using namespace std;
 typedef int64_t ll;
@@ -43,31 +43,34 @@ ll POW(ll a, ll b)
 
 //main
 
-int n,k;
-int a[maxn];
+ll n,k;
+ll a[maxn];
 void input()
 {
 	cin>>n>>k;
 	FOR(i,1,n)	cin>>a[i];
 }
-int prime[maxn];
+ll prime[maxn];
 void lds_go_goooo()
 {
-	for(int i=2;i+i<=k;i++)
+	for(int i=2;i<=k;i++)
 		if(!prime[i])
-			for(int j=i+i;j<=k;j+=i)
-				if(prime[j]==0)
-					prime[j]=-1,prime[i]++;
+			for(int j=i;j<=k;j+=i)
+			    if(j==i)
+			        prime[i]++;
+    			 else
+    				if(prime[j]==0)
+    					prime[j]=-1,prime[i]++;
 	FOR(i,1,n)
-		cout<<prime[a[i]]+1<<endl;
+		cout<<prime[a[i]]<<endl;
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen(task".INP", "r", stdin);
-    //freopen(task".OUT", "w", stdout);
+    freopen(task".INP", "r", stdin);
+    freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {

@@ -17,8 +17,8 @@ typedef int64_t ll;
 typedef long double ld;
 typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
-const ll maxn=10001;
-const ll LOG= 100;
+const ll maxn=100001;
+const ll LOG= log2(maxn)+2;
 const ll mod=26051968;
 const ll inf=1e18;
 
@@ -44,9 +44,9 @@ ll POW(ll a, ll b)
 
 //main
 
-long long LCA[maxn][LOG];
-long long maxx[maxn][LOG];
-long long minn[maxn][LOG];
+long long LCA[LOG][maxn];
+long long maxx[LOG][maxn];
+long long minn[LOG][maxn];
 long long h[maxn];
 long long m,n;
 
@@ -89,7 +89,7 @@ void init()
 	mset(maxx,0);
 	mset(minn,0x3f);
 	dfs(1,0,-1);
-	FOR(i,1,LOG)
+	FOR(i,1,LOG-1)
 		FOR(j,1,n)
 		{
 			LCA[i][j]=LCA[i-1][LCA[i-1][j]];

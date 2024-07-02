@@ -43,28 +43,37 @@ ll POW(ll a, ll b)
 
 //main
 
-	long	long  n,a,b,w,h;
+long long n,a,b,w,h;
 
 void input()
 {
 	cin>>n>>a>>b>>w>>h;
 }
+
+bool check(ll mid)
+{
+    ll N=h/(a+mid*2), M=w/(b+mid*2);
+    if (N*M>=n) return true;
+    ll k=w/(a+mid*2), l=h/(b+mid*2);
+    if (k*l>=n) return true;
+    return false;
+}
+
+long long binsearch(long long l, long long r)
+{
+     if(check(r))    return r;
+    if(l==r-1)  return l;
+   
+    long long mid=(l+r+1)/2;
+    if(check(mid))
+        return binsearch(mid,r);
+    else    
+        return binsearch(l,mid);
+}
+
 void lds_go_goooo()
 {
-	long long mid;
-		long	long l=1,r=max(h,w);
-	
-		while(r>l)
-		{
-			mid=(l+r)/2;
-			cout<<l<<' '<<r<<' '<<mid<<' '<<(w/(a+2*mid))*(h/(b+2*mid))<<' '<<w*h-(a+2*mid)*(b+2*mid)*n<<endl;
-			if((h/(a+2*mid))*(w/(b+2*mid))<n ||(w/(a+2*mid))*(h/(b+2*mid)))
-				r=mid;
-			else
-				l=mid;
-			
-		}//&& 
-	cout<<l;
+	cout<<binsearch(0,min(w,h));
 }
 
 int main()

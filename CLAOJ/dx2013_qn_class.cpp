@@ -19,7 +19,7 @@ typedef pair<ll, ll> ii;
 typedef pair<ll, ii> iii;
 const ll maxn=2*1e4+2;
 const ll mod=26051968;
-const ll inf=1e18;
+const ll inf=1e9;
 
 const int moveX[]={0,0,1,-1};
 const int moveY[]={-1,1,0,0};
@@ -43,8 +43,8 @@ ll POW(ll a, ll b)
 
 //main
 
-long long a[6001],b[5001];
-long long dp[3][50001];
+int a[10001],b[50001];
+int dp[3][500001];
 long long n,k;
 
 void input()
@@ -56,26 +56,30 @@ void input()
 void lds_go_goooo()
 {
 	mset(dp,0);
+	
 	FOR(o,1,k)
 	{
 		int i=o%2+1;
-		dp[i][i-1]=inf;
+		dp[i][o-1]=inf;
 		if(i==2)
-			FOR(j,i,n)
-				dp[i][j]=min(dp[i][j-1],dp[i-1][j-1]+abs(a[j]-b[i])),dp[i-2][j]=dp[i][j];
+			FOR(j,o,n)
+			{
+				dp[i][j]=min(dp[i][j-1],dp[i-1][j-1]+abs(a[j]-b[o])),dp[i-2][j]=dp[i][j];
+				dp[i-2][o-1]=inf;
+			}
 		else
-			FOR(j,i,n)
-				dp[i][j]=min(dp[i][j-1],dp[i-1][j-1]+abs(a[j]-b[i]));
+			FOR(j,o,n)
+				dp[i][j]=min(dp[i][j-1],dp[i-1][j-1]+abs(a[j]-b[o]));
 	}
-	cout<<dp[2][n];
+	cout<<dp[k%2==0?1:2][n];
 }
 
 int main()
 {
  	ios_base::sync_with_stdio(false);
     cin.tie(0);
-  //  freopen(task".INP", "r", stdin);
-  //  freopen(task".OUT", "w", stdout);
+    freopen(task".INP", "r", stdin);
+    freopen(task".OUT", "w", stdout);
     ll test_case=1; //cin>>test_case;
     while(test_case--)
     {
